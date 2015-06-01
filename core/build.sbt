@@ -1,26 +1,20 @@
 import com.typesafe.sbt.SbtNativePackager.packageArchetype
 import sbt.Keys._
 
-import com.typesafe.sbt.packager.archetypes.ServerLoader.{SystemV, Upstart}
+import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 
 serverLoading in Debian := SystemV
-
 
 enablePlugins(JavaServerAppPackaging)
 //enablePlugins(JDebPackaging)
 
 
-lazy val commonSettings = Seq(
-  organization in ThisBuild := "io.vamp.core",
-  version in ThisBuild := "0.7.6",
-  scalaVersion := "2.11.5" ,
-  maintainer in Windows := "magnetic.io",
-  maintainer in Debian := "Matthijs Dekker<matthijs@magnetic.io>"
-)
-
-name := """vamp-dist"""
+scalaVersion := "2.11.5"
 
 scalaVersion in ThisBuild := scalaVersion.value
+
+version in ThisBuild := "0.7.6"
+
 
 publishMavenStyle := true
 
@@ -54,34 +48,29 @@ resolvers in ThisBuild ++= Seq(
   Resolver.jcenterRepo
 )
 
-lazy val cli = project.in(file("cli")).
-  settings(commonSettings: _*).
-  settings(
-    packageArchetype.java_application,
-    name := "vamp-cli",
-    description := "Vamp CLI",
-    packageSummary in Linux := "Vamp Command Line Interface",
-    packageSummary in Windows := "Vamp Command Line Interface",
-    packageDescription := "The command line for Vamp",
-    wixProductId := "ce07be71-510d-414a-82d4-dff47631848a",
-    wixProductUpgradeId := "4552fb0e-e257-8dbd-9ecb-dba9dbacf424"
-  )
+organization in ThisBuild := "io.vamp.core"
 
-lazy val core = project.in(file("core")).
-  settings(commonSettings: _*).
-  settings(
-    packageArchetype.java_server,
-    name := "vamp-core",
-    description := "Vamp Core",
-    packageSummary in Linux := "Vamp Core",
-    packageSummary in Windows := "Vamp Core",
-    packageDescription := "Very Awsome Microservices Platform",
-    wixProductId := "e407be71-510d-414a-82d4-dff47631848a",
-    wixProductUpgradeId := "9752fb0e-e257-8dbd-9ecb-dba9dbacf424",
-    libraryDependencies ++=Seq(
-      "io.vamp" %% "core-bootstrap" % "0.7.6.140"
-    )
-  )
+maintainer in Windows := "magnetic.io"
+
+maintainer in Debian := "Matthijs Dekker<matthijs@magnetic.io>"
+
+name := "vamp-core"
+
+description := "Vamp Core"
+
+packageSummary in Linux := "Vamp Core"
+
+packageSummary in Windows := "Vamp Core"
+
+packageDescription := "Very Awsome Microservices Platform"
+
+wixProductId := "e407be71-510d-414a-82d4-dff47631848a"
+
+wixProductUpgradeId := "9752fb0e-e257-8dbd-9ecb-dba9dbacf424"
+
+libraryDependencies ++=Seq(
+  "io.vamp" %% "core-bootstrap" % "0.7.6.140"
+)
 
 
 // Java version and encoding requirements
