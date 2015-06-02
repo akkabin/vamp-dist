@@ -16,3 +16,6 @@ project/plugins/project/
 .idea/
 .vagrant/
 .iml
+cli/target/
+core/target/
+

@@ -6,6 +6,25 @@ enablePlugins(JavaServerAppPackaging)
 
 version in ThisBuild := "0.7.6"
 
+// we specify the name for our fat jar
+assemblyJarName in assembly := "vamp-core.jar"
+
+// removes all jar mappings in universal and appends the fat jar
+mappings in Universal := {
+  // universalMappings: Seq[(File,String)]
+  val universalMappings = (mappings in Universal).value
+  val fatJar = (assembly in Compile).value
+  // removing means filtering
+  val filtered = universalMappings filter {
+    case (file, name) =>  ! name.endsWith(".jar")
+  }
+  // add the fat jar
+  filtered :+ (fatJar -> ("lib/" + fatJar.getName))
+}
+
+// the bash scripts classpath only needs the fat jar
+scriptClasspath := Seq( (assemblyJarName in assembly).value )
+
 
 // ### Organisation
 organization in ThisBuild := "io.vamp"
