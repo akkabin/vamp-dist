@@ -1,0 +1,36 @@
+- name: Update the cache
+  apt: update_cache=yes
+#  tags: common-utils
+
+- name: Remove unwanted packages from the image
+  apt: name={{ item }} state=absent update_cache=no purge=yes
+#  tags: common-utils
+  with_items:
+    - puppet
+    - chef
+
+
+- name: Install several packages needed and utilities
+  apt: name={{ item }} state=present update_cache=no
+#  tags: common-utils
+  with_items:
+    - htop
+    - vim
+    - python-pip
+    - curl
+    - git
+    - unzip
+    - python-software-properties
+#    - language-pack-en
+
+- name: Set the locale
+  locale_gen: name=en_GB.UTF-8 state=present
+
+
+- name: Ensure github.com is a known host
+  lineinfile:
+    dest: /root/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"

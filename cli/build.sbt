@@ -10,11 +10,11 @@ version in ThisBuild := "0.7.6"
 // ### Organisation
 organization in ThisBuild := "io.vamp"
 
-name := "vamp-core"
+name := "vamp-cli"
 
-description := "Vamp Core"
+description := "Vamp CLI"
 
-packageDescription := "Very Awsome Microservices Platform"
+packageDescription := "Very Awsome Microservices Platform CLI"
 
 // ###  Debian
 serverLoading in Debian := SystemV
@@ -35,8 +35,8 @@ wixProductUpgradeId := "9752fb0e-e257-8dbd-9ecb-dba9dbacf424"
 
 // ### Docker
 maintainer in Docker := "Matthijs Dekker<matthijs@magnetic.io>"
-packageSummary in Docker := "Vamp Core"
-packageName in Docker := "vamp-core" // Only add this if you want to rename your docker image name
+packageSummary in Docker := "Vamp CLI"
+packageName in Docker := "vamp-cli" // Only add this if you want to rename your docker image name
 daemonUser in Docker := normalizedName.value // user in the Docker image which will execute the application (must already exist)
 
 //dockerBaseImage := "dockerfile/java" // Docker image to use as a base for the application image
@@ -59,7 +59,7 @@ resolvers in ThisBuild ++= Seq(
 )
 
 libraryDependencies ++=Seq(
-  "io.vamp" %% "core-bootstrap" % "0.7.6.140"
+  "io.vamp" %% "core-cli" % "0.7.6.3a04e66"
 )
 
 scalacOptions += "-target:jvm-1.8"

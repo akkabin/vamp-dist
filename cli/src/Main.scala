@@ -1,4 +1,5 @@
+import io.vamp.core.cli.VampCli
 
-class Main extends App {
+object Main extends VampCli {
 
 }

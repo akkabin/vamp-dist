@@ -6,7 +6,7 @@ import com.typesafe.sbt.packager.archetypes.ServerLoader.{SystemV, Upstart}
 serverLoading in Debian := SystemV
 
 
-enablePlugins(JavaServerAppPackaging)
+enablePlugins(JavaAppPackaging)
 //enablePlugins(JDebPackaging)
 
 
@@ -64,7 +64,10 @@ lazy val cli = project.in(file("cli")).
     packageSummary in Windows := "Vamp Command Line Interface",
     packageDescription := "The command line for Vamp",
     wixProductId := "ce07be71-510d-414a-82d4-dff47631848a",
-    wixProductUpgradeId := "4552fb0e-e257-8dbd-9ecb-dba9dbacf424"
+    wixProductUpgradeId := "4552fb0e-e257-8dbd-9ecb-dba9dbacf424",
+    libraryDependencies ++=Seq(
+      "io.vamp" %% "core-cli" % "0.7.6.3a04e66"
+    )
   )
 
 lazy val core = project.in(file("core")).

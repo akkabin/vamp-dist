@@ -14,3 +14,4 @@ project/plugins/project/
 .worksheet
 .iml
 .idea/
+.vagrant/
