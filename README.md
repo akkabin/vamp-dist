@@ -30,11 +30,32 @@ For more details, see: http://www.scala-sbt.org/sbt-native-packager/gettingstart
 
 
 ## Debian
-Create your own Debian build machine, by using the scripts in ansible/playbooks/vamp-debian-build.
+Create your own Debian machine, by using the scripts in ansible/playbooks/vamp-debian-build.
 
 First you need to setup your vagrant environment for this. See the `ansible/README.md`
 
 
+### Build vamp-core
+`cd vamp-dist/core`
+
+`sbt debian:packageBin`
+
+The .deb package can be found in `core/target`
+
+
+## Installing
+You can install a downloaded .deb file by issueing the command:
+
+`dpkg -i target/vamp-core_0.7.6_all.deb`
+
+
+Or add our vamp debian repo and install it from there
+
+`echo "deb http://dl.bintray.com/magneticio/debian /" | tee -a /etc/apt/sources.list.d/vamp.list`
+
+`apt-get update`
+
+`apt-get install vamp-core`
 
 
 

@@ -2,7 +2,7 @@ import sbt.Keys._
 import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 
 
-enablePlugins(JavaServerAppPackaging)
+enablePlugins(JavaAppPackaging)
 
 version in ThisBuild := "0.7.6"
 
@@ -54,9 +54,10 @@ scalaVersion := "2.11.5"
 scalaVersion in ThisBuild := scalaVersion.value
 
 resolvers in ThisBuild ++= Seq(
-  "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/",
+  Resolver.typesafeRepo("releases"),
   Resolver.jcenterRepo
 )
+
 
 libraryDependencies ++=Seq(
   "io.vamp" %% "core-cli" % "0.7.6.3a04e66"
