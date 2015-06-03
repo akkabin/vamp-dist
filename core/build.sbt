@@ -48,6 +48,17 @@ daemonUser in Docker := normalizedName.value // user in the Docker image which w
 //dockerRepository := Some("dockerusername") // Repository used when publishing Docker image
 
 
+mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
+  val conf = src / "main" / "resources" / "application.conf"
+  conf -> "conf/application.conf"
+}
+
+mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
+  val conf = src / "main" / "resources" / "logback.xml"
+  conf -> "conf/logback.xml"
+}
+
+
 // Creating custom packageOutputs formats
 
 addCommandAlias("packageDebianAll", "; clean " +
