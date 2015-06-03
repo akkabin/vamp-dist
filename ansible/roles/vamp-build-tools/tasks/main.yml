@@ -15,6 +15,7 @@
   with_items:
     - fakeroot
     - git
+    - lintian
     - docker.io
 
 
