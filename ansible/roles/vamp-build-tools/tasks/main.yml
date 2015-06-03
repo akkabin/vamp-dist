@@ -1,10 +1,10 @@
+---
 - name: Add SBT repo
   apt_repository: repo='deb http://dl.bintray.com/sbt/debian /' state=present
 
 
 - name: Add backports, to install docker.io
   apt_repository: repo='deb http://http.debian.net/debian jessie-backports main'  state=present
-
 
 - name: Update the cache
   apt: update_cache=yes
@@ -36,3 +36,4 @@
     state: present
     line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
     regexp: "^github\\.com"
+

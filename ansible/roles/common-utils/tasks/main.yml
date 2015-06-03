@@ -1,18 +1,25 @@
+---
 - name: Update the cache
   apt: update_cache=yes
-#  tags: common-utils
 
 - name: Remove unwanted packages from the image
   apt: name={{ item }} state=absent update_cache=no purge=yes
-#  tags: common-utils
   with_items:
     - puppet
     - chef
 
+- name: Check if packages need to be autoremoved
+  command: apt-get --dry-run autoremove
+  register: check_autoremove
+  changed_when: False
+
+- name: Autoremove unused packages
+  command: apt-get -y autoremove
+  when: "'packages will be REMOVED' in check_autoremove.stdout"
+
 
 - name: Install several packages needed and utilities
   apt: name={{ item }} state=present update_cache=no
-#  tags: common-utils
   with_items:
     - htop
     - vim
