@@ -2,21 +2,24 @@
   apt_repository: repo='deb http://dl.bintray.com/sbt/debian /' state=present
 
 
+- name: Add backports, to install docker.io
+  apt_repository: repo='deb http://http.debian.net/debian jessie-backports main'  state=present
+
+
 - name: Update the cache
   apt: update_cache=yes
 
 
 - name: Install utilities
   apt: name={{ item }} state=present update_cache=no
-#  tags: common-utils
   with_items:
     - fakeroot
     - git
+    - docker.io
 
 
 - name: Install sbt
   apt: name={{ item }} state=present update_cache=no force=yes
-#  tags: common-utils
   with_items:
     - sbt
 

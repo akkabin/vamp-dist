@@ -1,24 +1,28 @@
+# Your own Debian machine to build Vamp distributables
 
-# Preparing your environment
+
+## Build
+
+Perform the following commands:
+
+`vagrant up`
+
+`ansible-playbook --private-key=~/.vagrant.d/insecure_private_key  -u vagrant vamp-build.yml`
 
 
-### vagrant-hostsupdater
-Make sure to install the vagrant-hostsupdater:
+# Access
 
-`vagrant plugin install vagrant-hostsupdater`
+You can access the machine using either
 
-### Update .ssh/config
+ `vagrant ssh`
 
-Add the following section to the ~/.ssh/config
+or
 
-```
-# For vagrant virtual machines
-Host 192.168.35.* *.vamp.dev
-  StrictHostKeyChecking no
-  UserKnownHostsFile=/dev/null
-  User root
-  LogLevel ERROR
-```
+ `ssh build.vamp.dev`
 
-### Usefull links
-[6 practices for super smooth Ansible experience](http://hakunin.com/six-ansible-practices)
+
+## Remove
+
+To completely remove this machine, just run:
+
+`vagrant destroy`

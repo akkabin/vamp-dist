@@ -1,54 +1,32 @@
 import sbt.Keys._
 import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 import sbtassembly.AssemblyPlugin.autoImport._
-import sbtassembly.AssemblyPlugin.autoImport._
 
 
 enablePlugins(JavaAppPackaging)
 
 version in ThisBuild := "0.7.6"
 
-// we specify the name for our fat jar
-assemblyJarName in assembly := "vamp-cli.jar"
-
-// removes all jar mappings in universal and appends the fat jar
-mappings in Universal := {
-  // universalMappings: Seq[(File,String)]
-  val universalMappings = (mappings in Universal).value
-  val fatJar = (assembly in Compile).value
-  // removing means filtering
-  val filtered = universalMappings filter {
-    case (file, name) =>  ! name.endsWith(".jar")
-  }
-  // add the fat jar
-  filtered :+ (fatJar -> ("lib/" + fatJar.getName))
-}
-
-// the bash scripts classpath only needs the fat jar
-scriptClasspath := Seq( (assemblyJarName in assembly).value )
-
+libraryDependencies ++=Seq(
+  "io.vamp" %% "core-cli" % "0.7.6.3a04e66"
+)
 
 
 // ### Organisation
 organization in ThisBuild := "io.vamp"
-
-name := "vamp-cli"
-
+name := "vamp"
 description := "Vamp CLI"
-
 packageDescription := "Very Awsome Microservices Platform CLI"
 
 // ###  Debian
-serverLoading in Debian := SystemV
-packageSummary in Linux := "Vamp Core"
+//serverLoading in Debian := SystemV
+packageSummary in Linux := "Vamp CLI"
 maintainer in Debian := "Matthijs Dekker<matthijs@magnetic.io>"
 
 // ## RMP
 rpmVendor := "Magnetic.io"
 
-
 // ###  Windows
-
 //maintainer in Windows := "magnetic.io"
 packageSummary in Windows := "Vamp Core"
 wixProductId := "e407be71-510d-414a-82d4-dff47631848a"
@@ -81,13 +59,29 @@ resolvers in ThisBuild ++= Seq(
 )
 
 
-libraryDependencies ++=Seq(
-  "io.vamp" %% "core-cli" % "0.7.6.3a04e66"
-)
-
 scalacOptions += "-target:jvm-1.8"
 
 javacOptions ++= Seq("-encoding", "UTF-8")
 
 scalacOptions in ThisBuild ++= Seq(Opts.compile.deprecation, Opts.compile.unchecked) ++
   Seq("-Ywarn-unused-import", "-Ywarn-unused", "-Xlint", "-feature")
+
+
+ //Make a fat jar
+assemblyJarName in assembly := "vamp-cli.jar"
+
+// removes all jar mappings in universal and appends the fat jar
+mappings in Universal := {
+  // universalMappings: Seq[(File,String)]
+  val universalMappings = (mappings in Universal).value
+  val fatJar = (assembly in Compile).value
+  // removing means filtering
+  val filtered = universalMappings filter {
+    case (file, fileName) =>  ! fileName.endsWith(".jar")
+  }
+  // add the fat jar
+  filtered :+ (fatJar -> ("lib/" + fatJar.getName))
+}
+
+// the bash scripts classpath only needs the fat jar
+scriptClasspath := Seq( (assemblyJarName in assembly).value )
