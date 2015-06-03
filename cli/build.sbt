@@ -21,12 +21,9 @@ packageDescription := "Very Awsome Microservices Platform CLI"
 maintainer :=  "Matthijs Dekker <matthijs@magnetic.io>"
 
 executableScriptName := "vamp"
-
-mainClass in Compile := Some("Main")
+//mainClass in Compile := Some("Boot")
 
 // ###  Debian
-//serverLoading in Debian := SystemV
-
 //changelog in Debian := "changes.txt"
 
 
@@ -51,44 +48,6 @@ daemonUser in Docker := normalizedName.value // user in the Docker image which w
 //dockerExposedVolumes in Docker := Seq("/opt/docker/logs") // Data volumes to make available in image
 
 //dockerRepository := Some("dockerusername") // Repository used when publishing Docker image
-
-
-// Creating custom packageOutputs formats
-
-addCommandAlias("packageAll", "; clean " +
-  "; set serverLoading in Debian := com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV" +
-  "; packageDebianSystemV " +
-  "; clean " +
-  "; set serverLoading in Debian := com.typesafe.sbt.packager.archetypes.ServerLoader.Upstart" +
-  "; packageDebianUpstart " +
-  "; packageRpmSystemD")
-
-lazy val packageDebianUpstart = taskKey[File]("creates deb-upstart package")
-lazy val packageDebianSystemV = taskKey[File]("creates deb-systenv package")
-lazy val packageRpmSystemD = taskKey[File]("creates rpm-systenv package")
-
-packageDebianUpstart := {
-  val output = baseDirectory.value / "package" / "deb-upstart"
-  val debianFile = (packageBin in Debian).value
-  IO.move(debianFile, output)
-  output
-}
-
-packageDebianSystemV := {
-  val output = baseDirectory.value / "package" / "deb-systemv"
-  val debianFile = (packageBin in Debian).value
-  IO.move(debianFile, output)
-  output
-}
-
-packageRpmSystemD := {
-  val output = baseDirectory.value / "package" / "rpm-systemd"
-  val rpmFile = (packageBin in Rpm).value
-  IO.move(rpmFile, output)
-  output
-}
-
-
 
 
 // ###  Build
