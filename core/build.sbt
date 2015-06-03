@@ -7,7 +7,7 @@ enablePlugins(JavaServerAppPackaging)
 version in ThisBuild := "0.7.6"
 
 libraryDependencies ++=Seq(
-  "io.vamp" %% "core-bootstrap" % "0.7.6.140"
+  "io.vamp" %% "core-bootstrap" % "0.7.6.3a04e66"
 )
 
 
@@ -20,11 +20,11 @@ packageSummary := "Vamp Core"
 maintainer := "Matthijs Dekker <matthijs@magnetic.io>"
 
 // ###  Debian
-//serverLoading in Debian := SystemV
+serverLoading in Debian := SystemV
 
 
 // ## RMP
-rpmVendor := "Magnetic.io"
+rpmVendor := "magnetic.io"
 rpmUrl := Some("https://github.com/magneticio/vamp")
 rpmLicense := Some("Apache 2")
 
@@ -35,7 +35,6 @@ wixProductUpgradeId := "9752fb0e-e257-8dbd-9ecb-dba9dbacf424"
 
 
 // ### Docker
-maintainer in Docker := "Matthijs Dekker<matthijs@magnetic.io>"
 packageSummary in Docker := "Vamp Core"
 packageName in Docker := "vamp-core" // Only add this if you want to rename your docker image name
 daemonUser in Docker := normalizedName.value // user in the Docker image which will execute the application (must already exist)
@@ -107,7 +106,7 @@ mappings in Universal := {
   val fatJar = (assembly in Compile).value
   // removing means filtering
   val filtered = universalMappings filter {
-    case (file, name) =>  ! name.endsWith(".jar")
+    case (file, fileName) =>  ! fileName.endsWith(".jar")
   }
   // add the fat jar
   filtered :+ (fatJar -> ("lib/" + fatJar.getName))
