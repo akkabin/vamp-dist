@@ -14,28 +14,33 @@ libraryDependencies ++=Seq(
 
 // ### Organisation
 organization in ThisBuild := "io.vamp"
-name := "vamp"
-description := "Vamp CLI"
+name := "vamp-cli"
+description := "This is the command line interface for VAMP"
+packageSummary := "The Vamp CLI"
 packageDescription := "Very Awsome Microservices Platform CLI"
+maintainer :=  "Matthijs Dekker <matthijs@magnetic.io>"
+
+executableScriptName := "vamp"
+
+mainClass in Compile := Some("Main")
 
 // ###  Debian
 //serverLoading in Debian := SystemV
-packageSummary in Linux := "Vamp CLI"
-maintainer in Debian := "Matthijs Dekker<matthijs@magnetic.io>"
+
+//changelog in Debian := "changes.txt"
+
 
 // ## RMP
 rpmVendor := "Magnetic.io"
+rpmUrl := Some("https://github.com/magneticio/vamp")
+rpmLicense := Some("Apache 2")
 
 // ###  Windows
-//maintainer in Windows := "magnetic.io"
-packageSummary in Windows := "Vamp Core"
 wixProductId := "e407be71-510d-414a-82d4-dff47631848a"
 wixProductUpgradeId := "9752fb0e-e257-8dbd-9ecb-dba9dbacf424"
 
 
 // ### Docker
-maintainer in Docker := "Matthijs Dekker<matthijs@magnetic.io>"
-packageSummary in Docker := "Vamp CLI"
 packageName in Docker := "vamp-cli" // Only add this if you want to rename your docker image name
 daemonUser in Docker := normalizedName.value // user in the Docker image which will execute the application (must already exist)
 
@@ -46,6 +51,43 @@ daemonUser in Docker := normalizedName.value // user in the Docker image which w
 //dockerExposedVolumes in Docker := Seq("/opt/docker/logs") // Data volumes to make available in image
 
 //dockerRepository := Some("dockerusername") // Repository used when publishing Docker image
+
+
+// Creating custom packageOutputs formats
+
+addCommandAlias("packageAll", "; clean " +
+  "; set serverLoading in Debian := com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV" +
+  "; packageDebianSystemV " +
+  "; clean " +
+  "; set serverLoading in Debian := com.typesafe.sbt.packager.archetypes.ServerLoader.Upstart" +
+  "; packageDebianUpstart " +
+  "; packageRpmSystemD")
+
+lazy val packageDebianUpstart = taskKey[File]("creates deb-upstart package")
+lazy val packageDebianSystemV = taskKey[File]("creates deb-systenv package")
+lazy val packageRpmSystemD = taskKey[File]("creates rpm-systenv package")
+
+packageDebianUpstart := {
+  val output = baseDirectory.value / "package" / "deb-upstart"
+  val debianFile = (packageBin in Debian).value
+  IO.move(debianFile, output)
+  output
+}
+
+packageDebianSystemV := {
+  val output = baseDirectory.value / "package" / "deb-systemv"
+  val debianFile = (packageBin in Debian).value
+  IO.move(debianFile, output)
+  output
+}
+
+packageRpmSystemD := {
+  val output = baseDirectory.value / "package" / "rpm-systemd"
+  val rpmFile = (packageBin in Rpm).value
+  IO.move(rpmFile, output)
+  output
+}
+
 
 
 
