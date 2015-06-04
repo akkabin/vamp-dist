@@ -48,15 +48,19 @@ daemonUser in Docker := normalizedName.value // user in the Docker image which w
 //dockerRepository := Some("dockerusername") // Repository used when publishing Docker image
 
 
-//mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
-//  val conf = src / "main" / "resources" / "refererence.conf"
-//  conf -> "conf/refererence.conf"
-//}
+
+mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
+  val conf = src / "main" / "resources" / "refererence.conf"
+  conf -> "conf/reference.conf"
+}
 
 mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
   val conf = src / "main" / "resources" / "logback.xml"
   conf -> "conf/logback.xml"
 }
+
+bashScriptExtraDefines += """addJava "-Dconfig.file=${app_home}/../conf/logback.xml""""
+bashScriptExtraDefines += """addJava "-Dconfig.file=${app_home}/../conf/application.conf""""
 
 
 // Creating custom packageOutputs formats
