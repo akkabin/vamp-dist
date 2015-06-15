@@ -4,10 +4,10 @@ import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.6"
+version in ThisBuild := "0.7.7"
 
 libraryDependencies ++=Seq(
-  "io.vamp" %% "core-bootstrap" % "0.7.6.3a04e66"
+  "io.vamp" %% "core-bootstrap" % "0.7.7"
 )
 
 
@@ -51,7 +51,7 @@ daemonUser in Docker := normalizedName.value // user in the Docker image which w
 
 mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
   val conf = src / "main" / "resources" / "refererence.conf"
-  conf -> "conf/reference.conf"
+  conf -> "conf/application.conf"
 }
 
 mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
@@ -96,11 +96,6 @@ packageRpmSystemD := {
   IO.move(rpmFile, output)
   output
 }
-
-
-
-
-
 
 // ###  Build
 scalaVersion := "2.11.5"
