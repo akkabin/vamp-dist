@@ -32,11 +32,6 @@ rpmVendor := "Magnetic.io"
 rpmUrl := Some("https://github.com/magneticio/vamp")
 rpmLicense := Some("Apache 2")
 
-// ###  Windows
-wixProductId := "e407be71-510d-414a-82d4-dff47631848a"
-wixProductUpgradeId := "9752fb0e-e257-8dbd-9ecb-dba9dbacf424"
-
-
 // ### Docker
 packageName in Docker := "vamp-cli" // Only add this if you want to rename your docker image name
 daemonUser in Docker := normalizedName.value // user in the Docker image which will execute the application (must already exist)
@@ -51,7 +46,7 @@ daemonUser in Docker := normalizedName.value // user in the Docker image which w
 
 
 // ###  Build
-scalaVersion := "2.11.5"
+scalaVersion := "2.11.6"
 scalaVersion in ThisBuild := scalaVersion.value
 
 resolvers in ThisBuild ++= Seq(
