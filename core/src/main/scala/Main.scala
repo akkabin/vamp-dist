@@ -1,3 +1,1 @@
-
-object Main extends VampCore {
-}
+object Main extends io.vamp.core.bootstrap.VampCore
