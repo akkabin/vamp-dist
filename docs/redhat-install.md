@@ -25,6 +25,8 @@ To install docker, run `sudo yum install docker` (RH7)
 
 On RH6.5, you want to run `sudo yum install docker-io` 
 
+After installing docker, you need to start it `sudo service docker start` and tell it to start after a reboot `sudo chkconfig docker on`
+
 
 ## Install Core
 ```bash
