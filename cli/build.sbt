@@ -1,14 +1,13 @@
 import sbt.Keys._
-import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 import sbtassembly.AssemblyPlugin.autoImport._
 
 
 enablePlugins(JavaAppPackaging)
 
-version in ThisBuild := "0.7.6"
+version in ThisBuild := "0.7.7"
 
 libraryDependencies ++=Seq(
-  "io.vamp" %% "core-cli" % "0.7.6.3a04e66"
+  "io.vamp" %% "core-cli" % "0.7.7.642f6d5"
 )
 
 
@@ -21,6 +20,7 @@ packageDescription := "Very Awsome Microservices Platform CLI"
 maintainer :=  "Matthijs Dekker <matthijs@magnetic.io>"
 
 executableScriptName := "vamp"
+
 //mainClass in Compile := Some("Boot")
 
 // ###  Debian
@@ -86,3 +86,6 @@ mappings in Universal := {
 
 // the bash scripts classpath only needs the fat jar
 scriptClasspath := Seq( (assemblyJarName in assembly).value )
+
+// Add check for Java 8 (not for windows)
+bashScriptExtraDefines ++= IO.readLines(baseDirectory.value / "scripts" / "java_check.sh")
