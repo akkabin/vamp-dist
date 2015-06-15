@@ -7,7 +7,7 @@ enablePlugins(JavaServerAppPackaging)
 version in ThisBuild := "0.7.7"
 
 libraryDependencies ++=Seq(
-  "io.vamp" %% "core-bootstrap" % "0.7.7"
+  "io.vamp" %% "core-bootstrap" % "0.7.7.ae78d92"
 )
 
 
@@ -22,16 +22,10 @@ maintainer := "Matthijs Dekker <matthijs@magnetic.io>"
 // ###  Debian
 serverLoading in Debian := SystemV
 
-
 // ## RMP
 rpmVendor := "magnetic.io"
 rpmUrl := Some("https://github.com/magneticio/vamp")
 rpmLicense := Some("Apache 2")
-
-// ###  Windows
-maintainer in Windows := "magnetic.io"
-wixProductId := "e407be71-510d-414a-82d4-dff47631848a"
-wixProductUpgradeId := "9752fb0e-e257-8dbd-9ecb-dba9dbacf424"
 
 
 // ### Docker
@@ -98,7 +92,7 @@ packageRpmSystemD := {
 }
 
 // ###  Build
-scalaVersion := "2.11.5"
+scalaVersion := "2.11.6"
 scalaVersion in ThisBuild := scalaVersion.value
 
 resolvers in ThisBuild ++= Seq(
