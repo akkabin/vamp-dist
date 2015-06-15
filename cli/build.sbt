@@ -7,7 +7,7 @@ enablePlugins(JavaAppPackaging)
 version in ThisBuild := "0.7.7"
 
 libraryDependencies ++=Seq(
-  "io.vamp" %% "core-cli" % "0.7.7.642f6d5"
+  "io.vamp" %% "core-cli" % "0.7.7.4864550"
 )
 
 
