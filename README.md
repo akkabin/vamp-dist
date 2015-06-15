@@ -9,12 +9,13 @@ To build for all different platforms, you'll need to have access to different (v
 Currently, there are two applications supported: 
 
 - vamp-cli
+- vamp-core
 
 Still under development:
-- vamp-core
+
 - vamp-pulse
 - vamp-router
-            Updated
+
 
 ## Supported packages
 
@@ -55,7 +56,7 @@ The .deb package can be found in the `target` directory
 ## Installing
 You can install a downloaded .deb file by issueing the command:
 
-`dpkg -i target/vamp-cli_0.7.6_all.deb`
+`dpkg -i target/vamp-cli_0.7.7_all.deb`
 
 
 Or add our vamp debian repo and install it from there
