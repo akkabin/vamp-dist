@@ -24,17 +24,15 @@ The following packaging commands are supported through sbt:
 
 - universal:packageZipTarball
 - debian:packageBin
+- rpm:packageBin
 
 [To be developed / tested]
-
-- rpm:packageBin
-- windows:packageBin
 - universal:packageOsxDmg
 - docker:publishLocal
 
 
 If a specific command can be run successful depends on the platform you are using.
-For Linux packages, a Linux machine is required; for the Windows package, a Windows machine is needed.
+For Linux packages, a Linux machine is required; for the OS X, a Mac is needed.
 
 For more details, see: http://www.scala-sbt.org/sbt-native-packager/gettingstarted.html
 Lots of examples on how to use this plugin: https://github.com/muuki88/sbt-native-packager-examples
