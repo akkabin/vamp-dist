@@ -18,13 +18,24 @@ For detail on how to install Java 8, check the following page: http://tecadmin.n
 ### Docker | Marathon Cluster
 
 You either will need to have Docker install, or have access to a Marathon Cluster.
+
 The default Vamp install uses a Docker installation.
+
+To install docker, run `sudo yum install docker` (RH7)
+
+On RH6.5, you want to run `sudo yum install docker-io` 
 
 
 ## Install Core
 ```bash
 sudo yum install vamp-core-0.7.7-1.noarch.rpm
+```
 
+Check the `application.conf` file at `/usr/share/vamp-core/conf/` and change when needed.
+
+Start the application with the command:
+
+```bash
 sudo service vamp-core start
 ```
 
@@ -32,6 +43,6 @@ sudo service vamp-core start
 ## Install Cli
 ```bash
 sudo yum install vamp-cli-0.7.7-1.noarch.rpm
-
-vamp info
 ```
+
+Type `vamp version` to check if Vamp Cli has been installed properly.
