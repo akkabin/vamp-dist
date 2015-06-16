@@ -44,7 +44,7 @@ daemonUser in Docker := normalizedName.value // user in the Docker image which w
 
 
 mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
-  val conf = src / "main" / "resources" / "refererence.conf"
+  val conf = src / "main" / "resources" / "reference.conf"
   conf -> "conf/application.conf"
 }
 
