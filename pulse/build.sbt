@@ -7,7 +7,7 @@ enablePlugins(JavaServerAppPackaging)
 version in ThisBuild := "0.7.7"
 
 libraryDependencies ++=Seq(
-  "io.vamp" %% "pulse-server" % "0.7.7.b71867e"
+  "io.vamp" %% "pulse-server" % "0.7.7.d3000b8"
 )
 
 
@@ -116,7 +116,6 @@ mappings in Universal := {
 
 // the bash scripts classpath only needs the fat jar
 scriptClasspath := Seq( (assemblyJarName in assembly).value )
-
 
 
 scalacOptions += "-target:jvm-1.8"
