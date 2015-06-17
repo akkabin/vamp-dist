@@ -70,14 +70,14 @@ lazy val packageDebianUpstart = taskKey[File]("creates deb-upstart package")
 lazy val packageDebianSystemV = taskKey[File]("creates deb-systenv package")
 
 packageDebianUpstart := {
-  val output = baseDirectory.value / "package" / s"$name-$version-upstart.deb"
+  val output = baseDirectory.value / "package" / "upstart" / s"${name.value}-${version.value}.deb"
   val debianFile = (packageBin in Debian).value
   IO.move(debianFile, output)
   output
 }
 
 packageDebianSystemV := {
-  val output = baseDirectory.value / "package" / s"$name-$version-systemv.deb"
+  val output = baseDirectory.value / "package" / "systemv" / s"${name.value}-${version.value}.deb"
   val debianFile = (packageBin in Debian).value
   IO.move(debianFile, output)
   output
