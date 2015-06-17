@@ -22,9 +22,5 @@ sudo yum install sbt
 sudo yum install git rpmdevtools
 ```
 
-## Clone github directory
-``` bash
-git clone https://github.com/magneticio/vamp-dist.git
-cd vamp-dist
-```
+
 

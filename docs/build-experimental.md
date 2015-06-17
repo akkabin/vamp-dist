@@ -26,3 +26,59 @@ docker run -it -v $HOME/.sbt:/sbt -v $HOME/.ivy2:/ivy2 -v $PWD:/project vamp-red
 ```
 
 ** WARNING ** The docker run commands will take quite some time to complete. A good time to get some coffee and maybe update some of the documentation or write some new tests.
+
+
+
+
+
+## Applications
+Currently, there are three applications supported: 
+
+- vamp-cli
+- vamp-core
+- vamp-pulse
+
+
+Still under development:
+
+
+- vamp-router
+
+
+## Supported packages
+
+The following packaging commands are supported through sbt:
+
+[Tested]
+
+- universal:packageZipTarball
+- debian:packageBin
+- rpm:packageBin
+
+[To be developed / tested]
+- universal:packageOsxDmg
+- docker:publishLocal
+
+
+If a specific command can be run successful depends on the platform you are using.
+For Linux packages, a Linux machine is required; for the OS X, a Mac is needed.
+
+
+
+
+## Debian
+Create your own Debian machine, by using the scripts in ansible/playbooks/vamp-debian-build.
+
+First you need to setup your vagrant environment for this. See the `ansible/README.md`
+
+
+### Build vamp-cli
+`cd vamp-dist/cli`
+
+`sbt debian:packageBin`
+
+The .deb package can be found in the `target` directory
+
+
+
+

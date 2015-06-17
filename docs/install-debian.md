@@ -1,10 +1,3 @@
-#How to install on Red Hat (7)
-
-
-This document details how to install Vamp on a Red Hat Linux machine. It uses the Vamp .RPM published on Bintray.
-
-
-
 ## Prerequisites
 
 Before installing Vamp, make sure your system has the required software installed.
@@ -13,7 +6,7 @@ Before installing Vamp, make sure your system has the required software installe
 If Java 8 is not installed, please do so before continuing.
 To check your Java version, type: `java -version`
 
-For detail on how to install Java 8, check the following page: http://tecadmin.net/install-java-8-on-centos-rhel-and-fedora/
+For detail on how to install Java 8, check the following page:   --TODO--
 
 ### Docker | Marathon Cluster
 
@@ -21,22 +14,25 @@ You either will need to have Docker install, or have access to a Marathon Cluste
 
 The default Vamp install uses a Docker installation.
 
-To install docker, run `sudo yum install docker` (RH7)
-
-On RH6.5, you want to run `sudo yum install docker-io` 
+To install docker, run `sudo apt-get install dockerio`
 
 After installing docker, you need to start it `sudo service docker start` and tell it to start after a reboot `sudo chkconfig docker on`
 
 
-## Add the Vamp RPM Repository
+## Add the Vamp debian Repository
 
--- TODO --
+Or add our vamp debian repo and install it from there
+```bash
+echo "deb https://dl.bintray.com/magnetic-io/debian wheezy main" | sudo tee -a /etc/apt/sources.list
+sudo apt-get update
+sudo apt-get install vamp-cli
+```
 
 
 ## Install Core
 
 ```bash
-sudo yum install vamp-core-0.7.7-1.noarch.rpm
+sudo apt-get install vamp-core
 ```
 
 Check the `application.conf` file at `/usr/share/vamp-core/conf/` and change when needed.
@@ -52,7 +48,7 @@ sudo service vamp-core start
 ## Install Cli
 
 ```bash
-sudo yum install vamp-cli-0.7.7-1.noarch.rpm
+sudo apt-get install vamp-cli
 ```
 
 Type `vamp version` to check if Vamp Cli has been properly installed.
