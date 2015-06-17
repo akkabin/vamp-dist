@@ -19,14 +19,20 @@ To install docker, run `sudo apt-get install dockerio`
 After installing docker, you need to start it `sudo service docker start` and tell it to start after a reboot `sudo chkconfig docker on`
 
 
-## Add the Vamp debian Repository
+## Add the Vamp repository
 
-Or add our vamp debian repo and install it from there
+Ubuntu users can add our Wheezy repo
 ```bash
 echo "deb https://dl.bintray.com/magnetic-io/debian wheezy main" | sudo tee -a /etc/apt/sources.list
 sudo apt-get update
-```
+ ```
 
+
+Debian users should use our Jessie repo
+```bash
+echo "deb https://dl.bintray.com/magnetic-io/debian jessie main" | sudo tee -a /etc/apt/sources.list
+sudo apt-get update
+```
 
 ## Install Core
 

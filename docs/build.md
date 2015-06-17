@@ -34,7 +34,6 @@ To create a distributables for an application, first `cd` to the application dir
 - pulse
 - router
 
-
 To make sure everything is setup properly and have a clean build, start with
 
 ```bash
@@ -57,13 +56,22 @@ The package can be found in the `target/universal` directory and is typically na
 
 ### Creating debian packages
 
-You can build any package using the command
+You can build the cli package using the command
 
 ```bash
 sbt debian:packageBin
 ```
+he package can be found in the `target/` directory and is typically named `vamp-cli-<version>-all.deb`
 
-The package can be found in the `target/?????` directory and is typically named `vamp-<application>-<version>-all.deb`
+
+For the daemonized applications (Core, Pulse, Router) a SystemV and an Upstart version need to be build.
+Upstart is the default initialization manager used by Ubuntu, while Debian uses SystemV. 
+
+```bash
+sbt packageDebianAll
+``
+
+The package can be found in the `package/upstart` or `package/systemv` directory and is typically named `vamp-<application>-<version>.deb`
 
 
 
@@ -75,7 +83,7 @@ You can build any package using the command
 sbt rpm:packageBin
 ```
 
-The package can be found in the `target/rpm/RPMS/noarch/` directory and is typically named `vamp-<application>-<version>.rpm`
+The package can be found in the `target/rpm/RPMS/noarch/` directory and is typically named `vamp-<application>-<version>-1.noarch.rpm`
 
 ### Creating docker images
 
