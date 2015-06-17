@@ -87,17 +87,13 @@ The package can be found in the `target/rpm/RPMS/noarch/` directory and is typic
 
 ### Creating docker images
 
-** Warning** This has not been tested yet
+** Warning** This has not been tested yet (exposed ports have not been setup properly)
 
 
 ```bash
 sbt docker:publishLocal
 ```
 
-## Publish
-
-After successfully building a package, you might want to publish it.
-Details on how to do this can be found [here](https://github.com/magneticio/vamp-dist/blob/master/docs/publish.md)
 
 
 
