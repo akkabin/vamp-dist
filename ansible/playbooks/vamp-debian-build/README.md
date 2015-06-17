@@ -7,7 +7,7 @@ Perform the following commands:
 
 `vagrant up`
 
-`ansible-playbook --private-key=~/.vagrant.d/insecure_private_key  -u vagrant vamp-build.yml`
+`ansible-playbook --private-key=~/.vagrant.d/insecure_private_key  -u vagrant debian-vamp.yml`
 
 
 # Access
@@ -18,7 +18,7 @@ You can access the machine using either
 
 or
 
- `ssh build.vamp.dev`
+ `ssh debian.vamp.dev`
 
 
 ## Remove

@@ -6,8 +6,7 @@ Vagrant.configure('2') do |config|
   #config.vm.synced_folder ".", "/vagrant", disabled: true
   authorize_key_for_root config, '~/.ssh/id_dsa.pub', '~/.ssh/id_rsa.pub'
   {
-    'build'    => '192.168.35.20' #,
-#    'app1'        => '192.168.35.11'
+    'debian'    => '192.168.35.20'
   }.each do |short_name, ip|
     config.vm.define short_name do |host|
       host.vm.network 'private_network', ip: ip
@@ -19,5 +18,4 @@ Vagrant.configure('2') do |config|
      vb.cpus = 2
      vb.memory = "1024"
   end
-
 end

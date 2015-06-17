@@ -1,5 +1,5 @@
 ---
-- hosts: build-servers
+- hosts: debian-build-servers
   user: vagrant
   sudo: yes
   roles:
