@@ -3,6 +3,7 @@
 Creating packages for multiple platforms is made possible through the use of the sbt native packager plugin.
 
 For more details, see: http://www.scala-sbt.org/sbt-native-packager/gettingstarted.html
+
 Lots of examples on how to use this plugin: https://github.com/muuki88/sbt-native-packager-examples
 
 
@@ -13,6 +14,9 @@ For the docker image, you'll also need to have docker (boot2docker) installed.
 
 The Linux packages can only be build on a machine with the correct package manager. 
 In effect, you'll need a debian flavor machine to create .deb packages and a Red Hat flavor machine to create .rpm packages.
+
+Instruction how to prepare your debian machine can be found [here](https://github.com/magneticio/vamp-dist/blob/master/docs/prepare-debian.md).
+For Red Hat, use [these](https://github.com/magneticio/vamp-dist/blob/master/docs/prepare-redhat.md) instructions 
 
 
 ## Preparing the build
@@ -42,34 +46,36 @@ Now continue with the creating the package(s)
 
 ### Creating universal packages
 
+You can build any package using the command
+
 ```bash
 sbt universal:packageBin
 ```
 
-The package can be found in the `target/?????` directory
+The package can be found in the `target/universal` directory and is typically named `vamp-<application>-<version>.zip`
 
 
 ### Creating debian packages
 
-After setting up your [debian build environment](https://github.com/magneticio/vamp-dist/blob/master/docs/prepare-debian.md) you can build any package using the command
+You can build any package using the command
 
 ```bash
 sbt debian:packageBin
 ```
 
-The package can be found in the `target/?????` directory
+The package can be found in the `target/?????` directory and is typically named `vamp-<application>-<version>-all.deb`
 
 
 
 ### Creating rpm packages
 
-After setting up your [red hat build environment](https://github.com/magneticio/vamp-dist/blob/master/docs/prepare-redhat.md) you can build any package using the command
+You can build any package using the command
 
 ```bash
 sbt rpm:packageBin
 ```
 
-The package can be found in the `target/rpm/RPMS/noarch/` directory
+The package can be found in the `target/rpm/RPMS/noarch/` directory and is typically named `vamp-<application>-<version>.rpm`
 
 ### Creating docker images
 
