@@ -8,13 +8,14 @@ lib_managed/
 src_managed/
 project/boot/
 project/plugins/project/
+.vagrant/machines/*
+
 
 # Scala-IDE specific
 .scala_dependencies
 .worksheet
 .iml
 .idea/
-.vagrant/
 .iml
 cli/target/
 core/target/
