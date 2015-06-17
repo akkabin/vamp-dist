@@ -28,14 +28,3 @@ git clone https://github.com/magneticio/vamp-dist.git
 cd vamp-dist
 ```
 
-## Build CLI
-```bash
-cd cli
-sbt rpm:packageBin
-```
-
-## Build Core
-```bash
-cd core
-sbt rpm:packageBin
-```

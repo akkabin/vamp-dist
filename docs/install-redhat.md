@@ -42,6 +42,8 @@ sudo service vamp-core start
 ```
 
 
+
+
 ## Install Cli
 ```bash
 sudo yum install vamp-cli-0.7.7-1.noarch.rpm

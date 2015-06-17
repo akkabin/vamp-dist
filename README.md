@@ -2,69 +2,17 @@
 
 This project contains the definitions for distributing the different flavors in which we ship Vamp.
 
-To build for all different platforms, you'll need to have access to different (virtual) machines.
+We ship Vamp in 4 flavors:
+- universal zip
+  The zip fil containing a fat jar, scripts to run it on Linux (OS X) and Windows & configuration files
+- .deb, for Debian based Linux systems (Debian / Ubuntu)
+- .rpm, for the RPM based Linux systems (Red Hat / CentOS)
+- ~~Docker images, published on Docker hub~~ Coming soon
 
+Read more about how to create the different packages on our [build page](https://github.com/magneticio/vamp-dist/blob/master/docs//build.md)
 
-## Applications
-Currently, there are two applications supported: 
+Instructions on how to install the packages on each platform ca be found at our [installation page](https://github.com/magneticio/vamp-dist/blob/master/docs/install.md)
 
-- vamp-cli
-- vamp-core
-
-Still under development:
-
-- vamp-pulse
-- vamp-router
-
-
-## Supported packages
-
-The following packaging commands are supported through sbt:
-
-[Tested]
-
-- universal:packageZipTarball
-- debian:packageBin
-- rpm:packageBin
-
-[To be developed / tested]
-- universal:packageOsxDmg
-- docker:publishLocal
-
-
-If a specific command can be run successful depends on the platform you are using.
-For Linux packages, a Linux machine is required; for the OS X, a Mac is needed.
-
-For more details, see: http://www.scala-sbt.org/sbt-native-packager/gettingstarted.html
-Lots of examples on how to use this plugin: https://github.com/muuki88/sbt-native-packager-examples
-
-
-## Debian
-Create your own Debian machine, by using the scripts in ansible/playbooks/vamp-debian-build.
-
-First you need to setup your vagrant environment for this. See the `ansible/README.md`
-
-
-### Build vamp-cli
-`cd vamp-dist/cli`
-
-`sbt debian:packageBin`
-
-The .deb package can be found in the `target` directory
-
-
-## Installing
-You can install a downloaded .deb file by issueing the command:
-
-`dpkg -i target/vamp-cli_0.7.7_all.deb`
-
-
-Or add our vamp debian repo and install it from there
-```bash
-echo "deb https://dl.bintray.com/magnetic-io/debian wheezy main" | sudo tee -a /etc/apt/sources.list
-sudo apt-get update
-sudo apt-get install vamp-cli
-```
 
 
 
