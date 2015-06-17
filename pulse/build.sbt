@@ -30,17 +30,10 @@ rpmLicense := Some("Apache 2")
 
 // ### Docker
 packageSummary in Docker := "Vamp Pulse"
-packageName in Docker := "vamp-pulse" // Only add this if you want to rename your docker image name
-daemonUser in Docker := normalizedName.value // user in the Docker image which will execute the application (must already exist)
-
-//dockerBaseImage := "dockerfile/java" // Docker image to use as a base for the application image
-
-//dockerExposedPorts in Docker := Seq(9000, 9443) // Ports to expose from container for Docker container linking
-
-//dockerExposedVolumes in Docker := Seq("/opt/docker/logs") // Data volumes to make available in image
-
-//dockerRepository := Some("dockerusername") // Repository used when publishing Docker image
-
+packageName in Docker := "magneticio/vamp-pulse" // Only add this if you want to rename your docker image name
+dockerBaseImage := "java:8" // Docker image to use as a base for the application image
+dockerExposedPorts in Docker := Seq(8083, 9300) // Ports to expose from container for Docker container linking
+dockerUpdateLatest := true
 
 
 mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
