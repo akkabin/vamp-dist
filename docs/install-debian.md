@@ -6,7 +6,7 @@ Before installing Vamp, make sure your system has the required software installe
 If Java 8 is not installed, please do so before continuing.
 To check your Java version, type: `java -version`
 
-For detail on how to install Java 8, check the following page:   --TODO--
+For detail on how to install Java 8, check the following page: http://www.webupd8.org/2014/03/how-to-install-oracle-java-8-in-debian.html
 
 ### Docker | Marathon Cluster
 
@@ -25,7 +25,6 @@ Or add our vamp debian repo and install it from there
 ```bash
 echo "deb https://dl.bintray.com/magnetic-io/debian wheezy main" | sudo tee -a /etc/apt/sources.list
 sudo apt-get update
-sudo apt-get install vamp-cli
 ```
 
 
@@ -42,7 +41,6 @@ Start the application with the command:
 ```bash
 sudo service vamp-core start
 ```
-
 
 
 ## Install Cli
