@@ -70,7 +70,7 @@ Upstart is the default initialization manager used by Ubuntu, while Debian uses 
 
 ```bash
 sbt packageDebianAll
-``
+```
 
 The package can be found in the `package/upstart` or `package/systemv` directory and is typically named `vamp-<application>-<version>.deb`
 
