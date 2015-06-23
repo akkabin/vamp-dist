@@ -61,7 +61,8 @@ You can build the cli package using the command
 ```bash
 sbt debian:packageBin
 ```
-he package can be found in the `target/` directory and is typically named `vamp-cli-<version>-all.deb`
+
+The package can be found in the `target/` directory and is typically named `vamp-cli-<version>-all.deb`
 
 
 For the daemonized applications (Core, Pulse, Router) a SystemV and an Upstart version need to be build.
@@ -72,7 +73,6 @@ sbt packageDebianAll
 ``
 
 The package can be found in the `package/upstart` or `package/systemv` directory and is typically named `vamp-<application>-<version>.deb`
-
 
 
 ### Creating rpm packages
