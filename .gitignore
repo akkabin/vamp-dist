@@ -18,5 +18,9 @@ project/plugins/project/
 .idea/
 .iml
 cli/target/
+cli/project/target/
 core/target/
+core/project/target/
+pulse/target/
+pulse/project/target/
 

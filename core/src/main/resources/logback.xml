@@ -7,7 +7,7 @@
         </encoder>
     </appender>
 
-    <logger name="io.vamp" level="DEBUG"/>
+    <logger name="io.vamp" level="INFO"/>
 
     <logger name="scala.slick" level="WARN"/>
     <logger name="io.vamp.core.persistence.slick.components" level="INFO" />
