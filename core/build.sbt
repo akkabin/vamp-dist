@@ -47,7 +47,7 @@ mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, sr
   conf -> "conf/logback.xml"
 }
 
-bashScriptExtraDefines += """addJava "-Dconfig.file=${app_home}/../conf/logback.xml""""
+bashScriptExtraDefines += """addJava "-Dlogback.configurationFile=${app_home}/../conf/logback.xml""""
 bashScriptExtraDefines += """addJava "-Dconfig.file=${app_home}/../conf/application.conf""""
 
 

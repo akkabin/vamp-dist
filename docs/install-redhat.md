@@ -30,13 +30,23 @@ After installing docker, you need to start it `sudo service docker start` and te
 
 ## Add the Vamp RPM Repository
 
--- TODO --
+Use the following command to get a generated `.repo` file
+
+```bash
+wget https://bintray.com/magnetic-io/rpm/rpm -O bintray-magnetic-io-rpm.repo
+```
+
+Then move it into the know yum repos:
+
+```bash
+sudo mv  bintray-magnetic-io-rpm.repo /etc/yum.repos.d/
+```
 
 
 ## Install Core
 
 ```bash
-sudo yum install vamp-core-0.7.7-1.noarch.rpm
+sudo yum install vamp-core
 ```
 
 Check the `application.conf` file at `/usr/share/vamp-core/conf/` and change when needed.
@@ -52,7 +62,7 @@ sudo service vamp-core start
 ## Install Cli
 
 ```bash
-sudo yum install vamp-cli-0.7.7-1.noarch.rpm
+sudo yum install vamp-cli
 ```
 
 Type `vamp version` to check if Vamp Cli has been properly installed.
