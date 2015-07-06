@@ -34,6 +34,8 @@ To create a distributables for an application, first `cd` to the application dir
 - pulse
 - router
 
+Check the build.sbt in each directory, to use the correct version of jar files and set the correct version number.
+
 To make sure everything is setup properly and have a clean build, start with
 
 ```bash
