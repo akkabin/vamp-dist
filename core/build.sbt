@@ -7,7 +7,7 @@ enablePlugins(JavaServerAppPackaging)
 version in ThisBuild := "0.7.8"
 
 libraryDependencies ++=Seq(
-  "io.vamp" %% "core-bootstrap" % "0.7.8"
+  "io.vamp" %% "core-bootstrap" % "0.7.8.c31f096"
 )
 
 
