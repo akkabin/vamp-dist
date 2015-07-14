@@ -14,4 +14,3 @@ script:
 - echo ${PACKAGE} ${DISTRIBUTABLE} ${VERSION}
 - curl -v -T target/universal/${DISTRIBUTABLE} -u${BINTRAY_USER}:${BINTRAY_API_KEY} -H "X-Bintray-Package:${PACKAGE}"
   -H "X-Bintray-Version:${VERSION}" -H "X-Bintray-Publish:1"  https://api.bintray.com/content/magnetic-io/downloads/${PACKAGE}/${DISTRIBUTABLE}
-              Te
