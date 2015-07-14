@@ -9,7 +9,7 @@ script:
 - cd cli
 - sbt clean test universal:packageBin
 - export PACKAGE=vamp-cli
-- export DISTRIBUTABLE=`ls target/universal/vamp-cli-*.zip | xargs -n1 basename`
+- export DISTRIBUTABLE=`ls target/universal/${PACKAGE}-*.zip | xargs -n1 basename`
 - export VERSION=`echo ${DISTRIBUTABLE:9} | sed s/.zip//g`
 - echo ${PACKAGE} ${DISTRIBUTABLE} ${VERSION}
 - curl -v -T target/universal/${DISTRIBUTABLE} -u${BINTRAY_USER}:${BINTRAY_API_KEY}
@@ -17,15 +17,15 @@ script:
   -H "X-Bintray-Version:${VERSION}"
   -H "X-Bintray-Publish:1"
   https://api.bintray.com/content/magnetic-io/downloads/${PACKAGE}/${DISTRIBUTABLE}
-- sbt clean test debian:packageBin
-- export DISTRIBUTABLE=`ls target/universal/vamp-cli_*_all.deb | xargs -n1 basename`
+- sbt debian:packageBin
+- export DISTRIBUTABLE=`ls target/${PACKAGE}_*_all.deb | xargs -n1 basename`
 - export VERSION=`echo ${DISTRIBUTABLE:9} | sed s/_all.deb//g`
 - echo ${PACKAGE} ${DISTRIBUTABLE} ${VERSION}
 -  curl -v -T target/${DISTRIBUTABLE} -u${BINTRAY_USER}:${BINTRAY_API_KEY}
-   https://api.bintray.com/content/magnetic-io/debian/pool/vamp/v/vamp-cli/${DISTRIBUTABLE}
+   https://api.bintray.com/content/magnetic-io/debian/pool/vamp/v/${PACKAGE}/${DISTRIBUTABLE}
    -H "X-Bintray-Package:${PACKAGE}"
    -H "X-Bintray-Version:${VERSION}"
    -H "X-Bintray-Publish:1"
    -H "X-Bintray-Debian-Distribution:jessie,wheezy"
-   -H "X-Bintray-Debian-Component:main"
+   -H "X-Bintray-Debian-Component:main,main"
    -H "X-Bintray-Debian-Architecture:i386,amd64"
