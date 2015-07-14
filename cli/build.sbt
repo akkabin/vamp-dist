@@ -4,10 +4,10 @@ import sbtassembly.AssemblyPlugin.autoImport._
 
 enablePlugins(JavaAppPackaging)
 
-version in ThisBuild := "0.7.8"
+version in ThisBuild := "0.7.8-dev-1"
 
 libraryDependencies ++=Seq(
-  "io.vamp" %% "core-cli" % "0.7.8.c66a557"
+  "io.vamp" %% "core-cli" % "0.7.8-dev.7f76812"
 )
 
 
@@ -21,13 +21,7 @@ maintainer :=  "Matthijs Dekker <matthijs@magnetic.io>"
 
 executableScriptName := "vamp"
 
-//mainClass in Compile := Some("Boot")
-
-// ###  Debian
-//changelog in Debian := "changes.txt"
-
-
-// ## RMP
+// ## RPM
 rpmVendor := "Magnetic.io"
 rpmUrl := Some("https://github.com/magneticio/vamp")
 rpmLicense := Some("Apache 2")
