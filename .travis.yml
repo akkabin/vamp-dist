@@ -6,31 +6,8 @@ env:
   - secure: XI6/IdKG0uKPNGwX65aNGN5yLA3j4YcEkKZ81hF/jVbitFKkAWXkWk9LIF0XiX297yuyub8ELRND0kpRZaxWC6gdtt+Uje4EBgtPKlg12kxhy28wn0RLP8hcev+vEwKaj/nZbqfxlsLXvBt6opelEKotKmilNT6Lb/LZDXA4ANvX9pY0rip2yczAF827JbD2yclL/M5ngIzi7aktCREJfOWp9LFA2KOSyv6fdWb62ynNToAsZMjG4quHdgTUUc7thubug69sn2eKbDHKRqu7raeBSuswAm+Un+/s9Jq5OzjTr42h8WTgwTz7bMwj7bs/zGHREcQtOg1qin3+7M51auKL04Unwd1nkoxfI6ngUKW2u9o4RYuaZ1hdpyfRDNigDkqU74bfQO7HZBzxBFTvUvMXHzjy+cAFoKNhqE0/GBsvrP9ZGR70Hc/vXOp5kRWgntn0Hmy9RkItCGDAtWoY6Tqb5VHKa4BleQ9ulaLApoooH6njQMAgfYAUFIn23BzZ2rn8CUACyQphz9p6y22C0zaSagqAoNmoXSFBtZiGDU5Okg6IhC5ry87ElFLKgT7XP7U3+U+TsPg2u0GT4GaFwSwIMurXS4gDnWI2Mf6mwpicumMr4KFrkJiASFe7j4wdEV7iYcDmP+fbK9oCknjQh3U/DRrBibD7GZeLJpXld40=
   - secure: YCRcVBVdnigCuO+vJS3jOkaQBcZsAhIXPhBS7APWkVGFWju3cpj9L96MFteSVE74pJEeuLY7SV4ohkCvEOixmxOg8Fc+WsgRh9sygjb282ypjCbK3RWXuHsNzJSGwOOhVG2JGd/A0oe2qwCIHjwG1Uf3kKL/5T9WXmIh112ZPM8/rGlfUs2goLj0p9RBjru8AwFVF7nbxYIW6NCTbnzynwilJccXnSNF7g4lHuClOi/JFSWkaAfj3E/gNfT4yLbV6UGhqzq9AYwlitfNAvKWM7NeGhDxfg0N97rT+SyN5jwN4xO3BK9TSu02H21ZUBKHlYRiiT1bmt1GXgmvCCl7qOyUe9Fpx4Kh5ucNSWWoKPeh4Ldx81uTxgufGGiN1THszE83TaSA4kUaFkHEdNS4eOGwW+56dPuagaUithXINDkgjze6cNOd18x/SZr8G5a/M8oUkQy1Z0VV6cVlb1GKwTBxCkgGPQGxdj/Ob1aONxndcPPzjW4JwORXbxuUFsrM1HSDJqX6+y5I9iC0JZvsNw0U0Cy2gmbtLCQsOc4bAd9QOMkf1lfOiMgjRUqu06mryYXREZSRmoYUchn8OHKvWZVOpjI+SsrHryOKmgUajvxABZcsUUxwKS0lqXntTnEEuCm64agNS6HAh/4FdwxYcavkw6jcCWA9Nua+YL5hd3w=
 script:
-- cd cli
-- sbt clean test universal:packageBin
-- export PACKAGE=vamp-cli
-- export DISTRIBUTABLE=`ls target/universal/${PACKAGE}-*.zip | xargs -n1 basename`
-- export VERSION=`echo ${DISTRIBUTABLE:9} | sed s/.zip//g`
-- echo ${PACKAGE} ** ${DISTRIBUTABLE} ** ${VERSION}
-- curl -v -T target/universal/${DISTRIBUTABLE} -u${BINTRAY_USER}:${BINTRAY_API_KEY}
-  -H "X-Bintray-Package:${PACKAGE}"
-  -H "X-Bintray-Version:${VERSION}"
-  -H "X-Bintray-Publish:1"
-  https://api.bintray.com/content/magnetic-io/downloads/${PACKAGE}/${DISTRIBUTABLE}
-- sbt debian:packageBin
-- export DISTRIBUTABLE=`ls target/${PACKAGE}_*_all.deb | xargs -n1 basename`
-- export VERSION=`echo ${DISTRIBUTABLE:9} | sed s/_all.deb//g`
-- echo ${PACKAGE} ** ${DISTRIBUTABLE} ** ${VERSION}
--  curl -v -T target/${DISTRIBUTABLE} -u${BINTRAY_USER}:${BINTRAY_API_KEY}
-   https://api.bintray.com/content/magnetic-io/debian/pool/vamp/v/${PACKAGE}/${DISTRIBUTABLE}
-   -H "X-Bintray-Package:${PACKAGE}"
-   -H "X-Bintray-Version:${VERSION}"
-   -H "X-Bintray-Publish:1"
-   -H "X-Bintray-Debian-Distribution:jessie,wheezy"
-   -H "X-Bintray-Debian-Component:main,main"
-   -H "X-Bintray-Debian-Architecture:i386,amd64"
 ### CORE ###
-- cd../core
+- cd core
 - sbt clean test universal:packageBin
 - export PACKAGE=vamp-core
 - export DISTRIBUTABLE=`ls target/universal/${PACKAGE}-*.zip | xargs -n1 basename`
@@ -66,5 +43,33 @@ script:
   -H "X-Bintray-Debian-Distribution:jessie"
   -H "X-Bintray-Debian-Component:main"
   -H "X-Bintray-Debian-Architecture:i386,amd64"
+- cd ..
+
+### CLI ###
+- cd cli
+- sbt clean test universal:packageBin
+- export PACKAGE=vamp-cli
+- export DISTRIBUTABLE=`ls target/universal/${PACKAGE}-*.zip | xargs -n1 basename`
+- export VERSION=`echo ${DISTRIBUTABLE:9} | sed s/.zip//g`
+- echo ${PACKAGE} ** ${DISTRIBUTABLE} ** ${VERSION}
+- curl -v -T target/universal/${DISTRIBUTABLE} -u${BINTRAY_USER}:${BINTRAY_API_KEY}
+  -H "X-Bintray-Package:${PACKAGE}"
+  -H "X-Bintray-Version:${VERSION}"
+  -H "X-Bintray-Publish:1"
+  https://api.bintray.com/content/magnetic-io/downloads/${PACKAGE}/${DISTRIBUTABLE}
+- sbt debian:packageBin
+- export DISTRIBUTABLE=`ls target/${PACKAGE}_*_all.deb | xargs -n1 basename`
+- export VERSION=`echo ${DISTRIBUTABLE:9} | sed s/_all.deb//g`
+- echo ${PACKAGE} ** ${DISTRIBUTABLE} ** ${VERSION}
+-  curl -v -T target/${DISTRIBUTABLE} -u${BINTRAY_USER}:${BINTRAY_API_KEY}
+   https://api.bintray.com/content/magnetic-io/debian/pool/vamp/v/${PACKAGE}/${DISTRIBUTABLE}
+   -H "X-Bintray-Package:${PACKAGE}"
+   -H "X-Bintray-Version:${VERSION}"
+   -H "X-Bintray-Publish:1"
+   -H "X-Bintray-Debian-Distribution:jessie,wheezy"
+   -H "X-Bintray-Debian-Component:main,main"
+   -H "X-Bintray-Debian-Architecture:i386,amd64"
+- cd ..
+
 
 
