@@ -36,7 +36,7 @@ For vamp-cli, a single package will be build, but it must be published to both d
 To publish the .deb packages on Bintray, you can use the following commands:
 
 ```bash
-curl -T target/vamp-cli-<version>-all.deb -uplamola:<bintray-user>:<bintray-key> https://api.bintray.com/content/magnetic-io/debian/pool/vamp/v/vamp-cli/vamp-cli-<version>-all.deb -H "X-Bintray-Package:vamp-cli" -H "X-Bintray-Version:<version>" -H "X-Bintray-Debian-Distribution: jessie,wheezy" -H "X-Bintray-Debian-Component: main" -H "X-Bintray-Debian-Architecture: i386,amd64"
+curl -T target/vamp-cli_<version>_all.deb -u<bintray-user>:<bintray-key> https://api.bintray.com/content/magnetic-io/debian/pool/vamp/v/vamp-cli/vamp-cli_<version>_all.deb -H "X-Bintray-Package:vamp-cli" -H "X-Bintray-Version:<version>" -H "X-Bintray-Debian-Distribution: jessie,wheezy" -H "X-Bintray-Debian-Component: main" -H "X-Bintray-Debian-Architecture: i386,amd64"
 ```
 
 Replaces all three `<version>` tags with the actual version tag (e.g. 0.7.7) and the `<bintray-user>` and `<bintray-key>` tags with your Bintray credentials.
