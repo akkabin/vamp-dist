@@ -15,7 +15,7 @@ libraryDependencies ++=Seq(
 organization in ThisBuild := "io.vamp"
 name := "vamp-core"
 description := "The brain of Vamp"
-packageDescription := "Very Awsome Microservices Platform"
+packageDescription := "Very Awesome Microservices Platform"
 packageSummary := "Vamp Core"
 maintainer := "Matthijs Dekker <matthijs@magnetic.io>"
 

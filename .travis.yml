@@ -1,0 +1,10 @@
+language: scala
+scala:
+- 2.11.6
+script:
+ - cd cli
+ - sbt clean test
+ - sbt universal:packageBin
+ - sbt debian:packageBin
+ - ls target
+ - ls target/universal

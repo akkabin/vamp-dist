@@ -7,7 +7,7 @@ enablePlugins(JavaAppPackaging)
 version in ThisBuild := "0.7.8"
 
 libraryDependencies ++=Seq(
-  "io.vamp" %% "core-cli" % "0.7.8.c31f096"
+  "io.vamp" %% "core-cli" % "0.7.8.c66a557"
 )
 
 
@@ -16,7 +16,7 @@ organization in ThisBuild := "io.vamp"
 name := "vamp-cli"
 description := "This is the command line interface for VAMP"
 packageSummary := "The Vamp CLI"
-packageDescription := "Very Awsome Microservices Platform CLI"
+packageDescription := "Very Awesome Microservices Platform CLI"
 maintainer :=  "Matthijs Dekker <matthijs@magnetic.io>"
 
 executableScriptName := "vamp"
