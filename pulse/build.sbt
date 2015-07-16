@@ -4,7 +4,7 @@ import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.8"
+version in ThisBuild := "0.7.8-dev-1"
 
 libraryDependencies ++=Seq(
   "io.vamp" %% "pulse-server" % "0.7.8"
@@ -32,7 +32,7 @@ rpmLicense := Some("Apache 2")
 packageSummary in Docker := "Vamp Pulse"
 packageName in Docker := "magneticio/vamp-pulse" // Only add this if you want to rename your docker image name
 dockerBaseImage := "java:8" // Docker image to use as a base for the application image
-dockerExposedPorts in Docker := Seq(8083, 9300) // Ports to expose from container for Docker container linking
+dockerExposedPorts in Docker := Seq(8083, 9300, 9200) // Ports to expose from container for Docker container linking
 dockerUpdateLatest := true
 
 

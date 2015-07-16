@@ -7,69 +7,14 @@ env:
   - secure: YCRcVBVdnigCuO+vJS3jOkaQBcZsAhIXPhBS7APWkVGFWju3cpj9L96MFteSVE74pJEeuLY7SV4ohkCvEOixmxOg8Fc+WsgRh9sygjb282ypjCbK3RWXuHsNzJSGwOOhVG2JGd/A0oe2qwCIHjwG1Uf3kKL/5T9WXmIh112ZPM8/rGlfUs2goLj0p9RBjru8AwFVF7nbxYIW6NCTbnzynwilJccXnSNF7g4lHuClOi/JFSWkaAfj3E/gNfT4yLbV6UGhqzq9AYwlitfNAvKWM7NeGhDxfg0N97rT+SyN5jwN4xO3BK9TSu02H21ZUBKHlYRiiT1bmt1GXgmvCCl7qOyUe9Fpx4Kh5ucNSWWoKPeh4Ldx81uTxgufGGiN1THszE83TaSA4kUaFkHEdNS4eOGwW+56dPuagaUithXINDkgjze6cNOd18x/SZr8G5a/M8oUkQy1Z0VV6cVlb1GKwTBxCkgGPQGxdj/Ob1aONxndcPPzjW4JwORXbxuUFsrM1HSDJqX6+y5I9iC0JZvsNw0U0Cy2gmbtLCQsOc4bAd9QOMkf1lfOiMgjRUqu06mryYXREZSRmoYUchn8OHKvWZVOpjI+SsrHryOKmgUajvxABZcsUUxwKS0lqXntTnEEuCm64agNS6HAh/4FdwxYcavkw6jcCWA9Nua+YL5hd3w=
 script:
 ### CORE ###
-- cd core
-- sbt clean test universal:packageBin
-- export PACKAGE=vamp-core
-- export DISTRIBUTABLE=`ls target/universal/${PACKAGE}-*.zip | xargs -n1 basename`
-- export VERSION=`echo ${DISTRIBUTABLE:10} | sed s/.zip//g`
-- echo ${PACKAGE} ${DISTRIBUTABLE} ${VERSION}
-- curl -v -T target/universal/${DISTRIBUTABLE} -u${BINTRAY_USER}:${BINTRAY_API_KEY}
- -H "X-Bintray-Package:${PACKAGE}"
- -H "X-Bintray-Version:${VERSION}"
- -H "X-Bintray-Publish:1"
- https://api.bintray.com/content/magnetic-io/downloads/${PACKAGE}/${DISTRIBUTABLE}
-
-- sbt packageDebianAll
-- export DISTRIBUTABLE=`ls  package/upstart/${PACKAGE}-*.deb | xargs -n1 basename`
-- export VERSION=`echo ${DISTRIBUTABLE:10} | sed s/.deb//g`
-- echo ${PACKAGE} ** ${DISTRIBUTABLE} ** ${VERSION}
--  curl -v -T package/upstart/${DISTRIBUTABLE} -u${BINTRAY_USER}:${BINTRAY_API_KEY}
-  https://api.bintray.com/content/magnetic-io/debian/pool/vamp/v/${PACKAGE}/${PACKAGE}-${VERSION}_upstart.deb
-  -H "X-Bintray-Package:${PACKAGE}"
-  -H "X-Bintray-Version:${VERSION}"
-  -H "X-Bintray-Publish:1"
-  -H "X-Bintray-Debian-Distribution:wheezy"
-  -H "X-Bintray-Debian-Component:main"
-  -H "X-Bintray-Debian-Architecture:i386,amd64"
-
-- export DISTRIBUTABLE=`ls  package/systemv/${PACKAGE}-*.deb | xargs -n1 basename`
-- export VERSION=`echo ${DISTRIBUTABLE:10} | sed s/.deb//g`
-- echo ${PACKAGE} ** ${DISTRIBUTABLE} ** ${VERSION}
--  curl -v -T package/systemv/${DISTRIBUTABLE} -u${BINTRAY_USER}:${BINTRAY_API_KEY}
-  https://api.bintray.com/content/magnetic-io/debian/pool/vamp/v/${PACKAGE}/${PACKAGE}-${VERSION}_systemv.deb
-  -H "X-Bintray-Package:${PACKAGE}"
-  -H "X-Bintray-Version:${VERSION}"
-  -H "X-Bintray-Publish:1"
-  -H "X-Bintray-Debian-Distribution:jessie"
-  -H "X-Bintray-Debian-Component:main"
-  -H "X-Bintray-Debian-Architecture:i386,amd64"
-- cd ..
+- ../publish_scripts/publish_universal.sh core vamp_core
+- ../publish_scripts/publish_debian_server.sh core vamp_core
 
 ### CLI ###
-- cd cli
-- sbt clean test universal:packageBin
-- export PACKAGE=vamp-cli
-- export DISTRIBUTABLE=`ls target/universal/${PACKAGE}-*.zip | xargs -n1 basename`
-- export VERSION=`echo ${DISTRIBUTABLE:9} | sed s/.zip//g`
-- echo ${PACKAGE} ** ${DISTRIBUTABLE} ** ${VERSION}
-- curl -v -T target/universal/${DISTRIBUTABLE} -u${BINTRAY_USER}:${BINTRAY_API_KEY}
-  -H "X-Bintray-Package:${PACKAGE}"
-  -H "X-Bintray-Version:${VERSION}"
-  -H "X-Bintray-Publish:1"
-  https://api.bintray.com/content/magnetic-io/downloads/${PACKAGE}/${DISTRIBUTABLE}
-- sbt debian:packageBin
-- export DISTRIBUTABLE=`ls target/${PACKAGE}_*_all.deb | xargs -n1 basename`
-- export VERSION=`echo ${DISTRIBUTABLE:9} | sed s/_all.deb//g`
-- echo ${PACKAGE} ** ${DISTRIBUTABLE} ** ${VERSION}
--  curl -v -T target/${DISTRIBUTABLE} -u${BINTRAY_USER}:${BINTRAY_API_KEY}
-   https://api.bintray.com/content/magnetic-io/debian/pool/vamp/v/${PACKAGE}/${DISTRIBUTABLE}
-   -H "X-Bintray-Package:${PACKAGE}"
-   -H "X-Bintray-Version:${VERSION}"
-   -H "X-Bintray-Publish:1"
-   -H "X-Bintray-Debian-Distribution:jessie,wheezy"
-   -H "X-Bintray-Debian-Component:main,main"
-   -H "X-Bintray-Debian-Architecture:i386,amd64"
-- cd ..
+- ../publish_scripts/publish_universal.sh cli vamp_cli
+- ../publish_scripts/publish_debian_client.sh cli vamp_cli
 
-
+### PULSE ###
+- ../publish_scripts/publish_universal.sh pulse vamp_pulse
+- ../publish_scripts/publish_debian_server.sh pulse vamp_pulse
 
