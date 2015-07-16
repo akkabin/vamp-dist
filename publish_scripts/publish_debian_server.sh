@@ -51,14 +51,5 @@ echo "*** Publishing ${DISTRIBUTABLE} [version ${VERSION}, systemv] ***"
 
 ../publish_scripts/bintray_debian.sh ${PACKAGE} ${DISTRIBUTABLE}  package/systemv ${VERSION} jessie main i386,amd64
 
-#curl -v -T package/systemv/${DISTRIBUTABLE} \
-#  -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
-#  https://api.bintray.com/content/magnetic-io/debian/pool/vamp/v/${PACKAGE}/${PACKAGE}-${VERSION}_systemv.deb \
-#  -H "X-Bintray-Package:${PACKAGE}" \
-#  -H "X-Bintray-Version:${VERSION}" \
-#  -H "X-Bintray-Publish:1" \
-#  -H "X-Bintray-Debian-Distribution:jessie" \
-#  -H "X-Bintray-Debian-Component:main" \
-#  -H "X-Bintray-Debian-Architecture:i386,amd64"
 
 cd ..

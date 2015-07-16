@@ -29,14 +29,4 @@ echo "*** Publishing ${DISTRIBUTABLE}, version ${VERSION} ***"
 
 ../publish_scripts/bintray_debian.sh ${PACKAGE} ${DISTRIBUTABLE} target ${VERSION} jessie,wheezy main i386,amd64
 
-#curl -v -T target/${DISTRIBUTABLE} \
-#  -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
-#   https://api.bintray.com/content/magnetic-io/debian/pool/vamp/v/${PACKAGE}/${DISTRIBUTABLE}
-#   -H "X-Bintray-Package:${PACKAGE}" \
-#   -H "X-Bintray-Version:${VERSION}" \
-#   -H "X-Bintray-Publish:1" \
-#   -H "X-Bintray-Debian-Distribution:jessie,wheezy" \
-#   -H "X-Bintray-Debian-Component:main,main" \
-#   -H "X-Bintray-Debian-Architecture:i386,amd64" \
-
 cd ..
