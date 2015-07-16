@@ -28,7 +28,7 @@ ARCH=$7              #i386,amd64
 
 
 
-curl -v -T ${SOURCEPATH/${DISTRIBUTABLE} \
+curl -v -T ${SOURCEPATH}/${DISTRIBUTABLE} \
   -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
    https://api.bintray.com/content/magnetic-io/debian/pool/vamp/v/${PACKAGE}/${DISTRIBUTABLE}
    -H "X-Bintray-Package:${PACKAGE}" \
