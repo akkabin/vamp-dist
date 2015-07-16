@@ -40,7 +40,7 @@ echo Publishing ${DISTRIBUTABLE}, (version ${VERSION}, upstart)
 pwd
 
 # publish systemv version
-DISTRIBUTABLE=`ls ${1}/package/systemv/${PACKAGE}-*.deb | xargs -n1 basename`
+DISTRIBUTABLE=`ls package/systemv/${PACKAGE}-*.deb | xargs -n1 basename`
 VERSION=`echo ${DISTRIBUTABLE:{#PACKAGE}+1}} | sed s/.deb//g`
 
 : ${DISTRIBUTABLE:?"not set"}

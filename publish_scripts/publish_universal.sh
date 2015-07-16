@@ -20,7 +20,7 @@ sbt clean test universal:packageBin
 
 pwd
 
-DISTRIBUTABLE=`ls ${1}/target/universal/${PACKAGE}-*.zip | xargs -n1 basename`
+DISTRIBUTABLE=`ls target/universal/${PACKAGE}-*.zip | xargs -n1 basename`
 VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/.zip//g`
 
 : ${DISTRIBUTABLE:?"DISTRIBUTABLE not set"}
