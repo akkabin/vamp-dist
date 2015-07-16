@@ -8,7 +8,8 @@ lib_managed/
 src_managed/
 project/boot/
 project/plugins/project/
-anisble/playbooks/*/.vagrant/machines/*
+anisble/playbooks/**/.vagrant/machines/
+
 
 
 # Scala-IDE specific
