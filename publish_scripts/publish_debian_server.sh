@@ -19,11 +19,11 @@ echo building ${PACKAGE}
 sbt packageDebianAll
 
 # publish upstart version
-DISTRIBUTABLE=`ls  package/upstart/${PACKAGE}-*.deb | xargs -n1 basename`
+DISTRIBUTABLE=`ls package/upstart/${PACKAGE}-*.deb | xargs -n1 basename`
 VERSION=`echo ${DISTRIBUTABLE:{#PACKAGE}+1}} | sed s/.deb//g`
 
-: ${DISTRIBUTABLE:?"DISTRIBUTABLE not set"}
-: ${VERSION:?"VERSION not set"}
+: ${DISTRIBUTABLE:?"not set"}
+: ${VERSION:?"not set"}
 
 echo Publishing ${DISTRIBUTABLE}, (version ${VERSION}, upstart)
 
@@ -37,13 +37,14 @@ echo Publishing ${DISTRIBUTABLE}, (version ${VERSION}, upstart)
 #  -H "X-Bintray-Debian-Component:main" \
 #  -H "X-Bintray-Debian-Architecture:i386,amd64"
 
+pwd
 
 # publish systemv version
-DISTRIBUTABLE=`ls  package/systemv/${PACKAGE}-*.deb | xargs -n1 basename`
+DISTRIBUTABLE=`ls ${1}/package/systemv/${PACKAGE}-*.deb | xargs -n1 basename`
 VERSION=`echo ${DISTRIBUTABLE:{#PACKAGE}+1}} | sed s/.deb//g`
 
-: ${DISTRIBUTABLE:?"DISTRIBUTABLE not set"}
-: ${VERSION:?"VERSION not set"}
+: ${DISTRIBUTABLE:?"not set"}
+: ${VERSION:?"not set"}
 
 echo Publishing ${DISTRIBUTABLE}, (version ${VERSION}, systemv)
 

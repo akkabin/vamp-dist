@@ -18,7 +18,7 @@ echo building ${PACKAGE}
 
 sbt debian:packageBin
 
-DISTRIBUTABLE=`ls target/${PACKAGE}_*_all.deb | xargs -n1 basename`
+DISTRIBUTABLE=`ls ${1}/target/${PACKAGE}_*_all.deb | xargs -n1 basename`
 VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/_all.deb//g`
 
 : ${DISTRIBUTABLE:?"DISTRIBUTABLE not set"}
