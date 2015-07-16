@@ -28,7 +28,7 @@ rpmLicense := Some("Apache 2")
 
 // ### Docker
 packageName in Docker := "vamp-cli" // Only add this if you want to rename your docker image name
-daemonUser in Docker := normalizedName.value // user in the Docker image which will execute the application (must already exist)
+//daemonUser in Docker := normalizedName.value // user in the Docker image which will execute the application (must already exist)
 
 //dockerBaseImage := "dockerfile/java" // Docker image to use as a base for the application image
 

@@ -14,7 +14,7 @@ cd $1
 #arg 2 = package
 PACKAGE=$2
 
-echo building ${PACKAGE}
+echo *** Building ${PACKAGE} ***
 
 sbt packageDebianAll
 
@@ -25,7 +25,7 @@ VERSION=`echo ${DISTRIBUTABLE:{#PACKAGE}+1}} | sed s/.deb//g`
 : ${DISTRIBUTABLE:?"not set"}
 : ${VERSION:?"not set"}
 
-echo Publishing ${DISTRIBUTABLE}, (version ${VERSION}, upstart)
+echo *** Publishing ${DISTRIBUTABLE}, (version ${VERSION}, upstart) ***
 
 #curl -v -T package/upstart/${DISTRIBUTABLE} \
 #  -u${BINTRAY_USER}:${BINTRAY_API_KEY}  \
@@ -37,8 +37,6 @@ echo Publishing ${DISTRIBUTABLE}, (version ${VERSION}, upstart)
 #  -H "X-Bintray-Debian-Component:main" \
 #  -H "X-Bintray-Debian-Architecture:i386,amd64"
 
-pwd
-
 # publish systemv version
 DISTRIBUTABLE=`ls package/systemv/${PACKAGE}-*.deb | xargs -n1 basename`
 VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/.deb//g`
@@ -46,7 +44,7 @@ VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/.deb//g`
 : ${DISTRIBUTABLE:?"not set"}
 : ${VERSION:?"not set"}
 
-echo Publishing ${DISTRIBUTABLE}, (version ${VERSION}, systemv)
+echo *** Publishing ${DISTRIBUTABLE}, (version ${VERSION}, systemv) ***
 
 #curl -v -T package/systemv/${DISTRIBUTABLE} \
 #  -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
