@@ -41,7 +41,7 @@ pwd
 
 # publish systemv version
 DISTRIBUTABLE=`ls package/systemv/${PACKAGE}-*.deb | xargs -n1 basename`
-VERSION=`echo ${DISTRIBUTABLE:{#PACKAGE}+1}} | sed s/.deb//g`
+VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/.deb//g`
 
 : ${DISTRIBUTABLE:?"not set"}
 : ${VERSION:?"not set"}
