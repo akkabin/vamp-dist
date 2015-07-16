@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Check number of args
 if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <directory-name> <package-name>"
+    SCRIPTNAME=$(basename "$0")
+    echo "Usage: ${SCRIPTNAME} <directory-name> <package-name>"
     exit 1
 fi
 
@@ -18,8 +19,6 @@ echo "*** Building ${PACKAGE} ***"
 
 sbt clean test universal:packageBin
 
-pwd
-
 DISTRIBUTABLE=`ls target/universal/${PACKAGE}-*.zip | xargs -n1 basename`
 VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/.zip//g`
 
@@ -28,11 +27,6 @@ VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/.zip//g`
 
 echo "*** Publishing ${DISTRIBUTABLE}, version ${VERSION} ***"
 
-# curl -v -T target/universal/${DISTRIBUTABLE} \
-# -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
-# -H "X-Bintray-Package:${PACKAGE}" \
-# -H "X-Bintray-Version:${VERSION}" \
-# -H "X-Bintray-Publish:1" \
-# https://api.bintray.com/content/magnetic-io/downloads/${PACKAGE}/${DISTRIBUTABLE}
+../publish_scripts/bintray_upload.sh ${PACKAGE} ${DISTRIBUTABLE} target/universal ${VERSION}
 
 cd ..

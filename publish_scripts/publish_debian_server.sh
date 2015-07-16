@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Check number of args
 if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <directory-name> <package-name>"
+    SCRIPTNAME=$(basename "$0")
+    echo "Usage: ${SCRIPTNAME} <directory-name> <package-name>"
     exit 1
 fi
 
@@ -27,6 +28,8 @@ VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1}} | sed s/.deb//g`
 
 echo "*** Publishing ${DISTRIBUTABLE} [version ${VERSION}, upstart] ***"
 
+../publish_scripts/bintray_debian.sh ${PACKAGE} ${DISTRIBUTABLE} package/upstart ${VERSION} wheezy main i386,amd64
+
 #curl -v -T package/upstart/${DISTRIBUTABLE} \
 #  -u${BINTRAY_USER}:${BINTRAY_API_KEY}  \
 #  https://api.bintray.com/content/magnetic-io/debian/pool/vamp/v/${PACKAGE}/${PACKAGE}-${VERSION}_upstart.deb \
@@ -45,6 +48,8 @@ VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/.deb//g`
 : ${VERSION:?"not set"}
 
 echo "*** Publishing ${DISTRIBUTABLE} [version ${VERSION}, systemv] ***"
+
+../publish_scripts/bintray_debian.sh ${PACKAGE} ${DISTRIBUTABLE}  package/systemv ${VERSION} jessie main i386,amd64
 
 #curl -v -T package/systemv/${DISTRIBUTABLE} \
 #  -u${BINTRAY_USER}:${BINTRAY_API_KEY} \

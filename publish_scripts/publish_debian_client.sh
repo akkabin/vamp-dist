@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Check number of args
 if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <directory-name> <package-name>"
+    SCRIPTNAME=$(basename "$0")
+    echo "Usage: ${SCRIPTNAME} <directory-name> <package-name>"
     exit 1
 fi
 
@@ -25,6 +26,8 @@ VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/_all.deb//g`
 : ${VERSION:?"VERSION not set"}
 
 echo "*** Publishing ${DISTRIBUTABLE}, version ${VERSION} ***"
+
+../publish_scripts/bintray_debian.sh ${PACKAGE} ${DISTRIBUTABLE} target ${VERSION} jessie,wheezy main i386,amd64
 
 #curl -v -T target/${DISTRIBUTABLE} \
 #  -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
