@@ -14,7 +14,7 @@ cd $1
 #arg 2 = package
 PACKAGE=$2
 
-echo *** Building ${PACKAGE} ***
+echo "*** Building ${PACKAGE} ***"
 
 sbt debian:packageBin
 
@@ -24,7 +24,7 @@ VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/_all.deb//g`
 : ${DISTRIBUTABLE:?"DISTRIBUTABLE not set"}
 : ${VERSION:?"VERSION not set"}
 
-echo *** Publishing ${DISTRIBUTABLE}, version ${VERSION} ***
+echo "*** Publishing ${DISTRIBUTABLE}, version ${VERSION} ***"
 
 #curl -v -T target/${DISTRIBUTABLE} \
 #  -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
