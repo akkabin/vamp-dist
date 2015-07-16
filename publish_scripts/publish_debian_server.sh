@@ -25,7 +25,7 @@ VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1}} | sed s/.deb//g`
 : ${DISTRIBUTABLE:?"not set"}
 : ${VERSION:?"not set"}
 
-echo *** Publishing ${DISTRIBUTABLE}, (version ${VERSION}, upstart) ***
+echo *** Publishing ${DISTRIBUTABLE} [version ${VERSION}, upstart] ***
 
 #curl -v -T package/upstart/${DISTRIBUTABLE} \
 #  -u${BINTRAY_USER}:${BINTRAY_API_KEY}  \
@@ -44,7 +44,7 @@ VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/.deb//g`
 : ${DISTRIBUTABLE:?"not set"}
 : ${VERSION:?"not set"}
 
-echo *** Publishing ${DISTRIBUTABLE}, (version ${VERSION}, systemv) ***
+echo *** Publishing ${DISTRIBUTABLE} [version ${VERSION}, systemv] ***
 
 #curl -v -T package/systemv/${DISTRIBUTABLE} \
 #  -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
