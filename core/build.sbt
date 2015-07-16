@@ -4,12 +4,15 @@ import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.8"
+version in ThisBuild := "0.7.8-dev-1"
+
+val vampBootstrapVersion = "0.7.8-experimental.247896d"
+val vampUiVersion = "0.0.2-27-dev"
 
 libraryDependencies ++=Seq(
-  "io.vamp" %% "core-bootstrap" % "0.7.8.c31f096"
+  "io.vamp" %% "core-bootstrap" % vampBootstrapVersion,
+  "vamp-ui" % "vamp-ui" % vampUiVersion from  s"https://bintray.com/artifact/download/magnetic-io/downloads/vamp-ui/vamp-ui-$vampUiVersion.jar"
 )
-
 
 // ### Organisation
 organization in ThisBuild := "io.vamp"
@@ -83,7 +86,7 @@ scalaVersion := "2.11.6"
 scalaVersion in ThisBuild := scalaVersion.value
 
 resolvers in ThisBuild ++= Seq(
-  "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/",
+  Resolver.typesafeRepo("releases"),
   Resolver.jcenterRepo
 )
 
