@@ -19,7 +19,7 @@ echo "*** Building ${PACKAGE} ***"
 
 sbt rpm:packageBin
 
-DISTRIBUTABLE=`ls target/rpm/RPMS/noarch${PACKAGE}-*.rpm | xargs -n1 basename`
+DISTRIBUTABLE=`ls target/rpm/RPMS/noarch/${PACKAGE}-*.rpm | xargs -n1 basename`
 VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/-1.noarch.rpm//g`
 
 : ${DISTRIBUTABLE:?"DISTRIBUTABLE not set"}
