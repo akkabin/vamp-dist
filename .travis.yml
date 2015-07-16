@@ -19,7 +19,7 @@ script:
  -H "X-Bintray-Publish:1"
  https://api.bintray.com/content/magnetic-io/downloads/${PACKAGE}/${DISTRIBUTABLE}
 
-- sbt debian:packageBin
+- sbt packageDebianAll
 - export DISTRIBUTABLE=`ls  package/upstart/${PACKAGE}-*.deb | xargs -n1 basename`
 - export VERSION=`echo ${DISTRIBUTABLE:10} | sed s/.deb//g`
 - echo ${PACKAGE} ** ${DISTRIBUTABLE} ** ${VERSION}
