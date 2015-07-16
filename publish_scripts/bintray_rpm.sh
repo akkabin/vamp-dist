@@ -23,4 +23,5 @@ VERSION=$4
 
 curl -v -T ${SOURCEPATH}/${DISTRIBUTABLE} \
      -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
+     -H "X-Bintray-Publish:1" \
      https://api.bintray.com/content/magnetic-io/rpm/${PACKAGE}/${VERSION}/${DISTRIBUTABLE}
