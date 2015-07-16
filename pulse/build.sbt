@@ -4,7 +4,7 @@ import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.8.1"
+version in ThisBuild := "0.7.8.2"
 
 libraryDependencies ++=Seq(
   "io.vamp" %% "pulse-server" % "0.7.8"

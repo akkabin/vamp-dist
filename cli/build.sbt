@@ -4,7 +4,7 @@ import sbtassembly.AssemblyPlugin.autoImport._
 
 enablePlugins(JavaAppPackaging)
 
-version in ThisBuild := "0.7.8.1"
+version in ThisBuild := "0.7.8.2"
 
 libraryDependencies ++=Seq(
   "io.vamp" %% "core-cli" % "0.7.8-dev.7f76812"
