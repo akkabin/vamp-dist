@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 # Check number of args
 if [ "$#" -ne 2 ]; then
     SCRIPTNAME=$(basename "$0")
