@@ -7,15 +7,22 @@ addons:
   apt:
     packages:
     - rpm
+sudo: false
 cache:
- apt: true
- directories:
- - $HOME/.sbt
- - $HOME/.ivy2
+  apt: true
+  directories:
+  - $HOME/.sbt
+  - $HOME/.ivy2
+notifications:
+ slack:
+   secure: fkOz6I3XLAvr/GHmwuGdqXfdRBYmRZ+Mj+6gLTLAvvwhOZ5+YUdi8c/3xYJtqvvwwMSd63JeuV0Fw3s0Q8sfNbLdraJIMIrCaB7r2oMp1kO6HUy8aMDU49azDY7bSOFE9Q48298P8ByaERKjgtQy2HyMW16JB1iqTXYrhkTfZC+LfzPpKXszGecxsRSMdzkCc8TAgYktDTBLgY/8VqBrYr71RBr/tNDpDGWssGcrk6a1mjYHntPGDecK6Z08ZXaFWeRRD6fLAINYTbiLWD/gn/UoGlkZE4d5WHgmWsxsgCvvWSTA7TbGaXMqwEhVvPlSJB6ROqn0+uS0Cp6wXPWCb87qztJMomOGLa/UepHSWxP11U4iQjDe7sxiNlPTfLiQoltlWostPieEtse1zhEiBfuTF4WDZw5OG3Y+Lg0w7ZkPsUZaXiNq7YCavw2l7IDHRedr05rIELmXTwXFSLA4jSXkevksuJEQ6iFULa2X0bCIf1pOYx3DIl36z/aXXSZ38rWWJoKltSRJTVTubhenuy980h6aM2fqjFHpyo0N5E9e46h2sKOx9otFcj3QD19SdkOs7/leh2AA95dVKJ8Uy2jIyy2vQtRMS5SJLv0z3aJtIL8A4MHUflmgoRW0xpzrca8I+G/UkvdV2q9nHj9C8LPQdra+LGAb65uQYWxkxlw=
 env:
   global:
   - secure: XI6/IdKG0uKPNGwX65aNGN5yLA3j4YcEkKZ81hF/jVbitFKkAWXkWk9LIF0XiX297yuyub8ELRND0kpRZaxWC6gdtt+Uje4EBgtPKlg12kxhy28wn0RLP8hcev+vEwKaj/nZbqfxlsLXvBt6opelEKotKmilNT6Lb/LZDXA4ANvX9pY0rip2yczAF827JbD2yclL/M5ngIzi7aktCREJfOWp9LFA2KOSyv6fdWb62ynNToAsZMjG4quHdgTUUc7thubug69sn2eKbDHKRqu7raeBSuswAm+Un+/s9Jq5OzjTr42h8WTgwTz7bMwj7bs/zGHREcQtOg1qin3+7M51auKL04Unwd1nkoxfI6ngUKW2u9o4RYuaZ1hdpyfRDNigDkqU74bfQO7HZBzxBFTvUvMXHzjy+cAFoKNhqE0/GBsvrP9ZGR70Hc/vXOp5kRWgntn0Hmy9RkItCGDAtWoY6Tqb5VHKa4BleQ9ulaLApoooH6njQMAgfYAUFIn23BzZ2rn8CUACyQphz9p6y22C0zaSagqAoNmoXSFBtZiGDU5Okg6IhC5ry87ElFLKgT7XP7U3+U+TsPg2u0GT4GaFwSwIMurXS4gDnWI2Mf6mwpicumMr4KFrkJiASFe7j4wdEV7iYcDmP+fbK9oCknjQh3U/DRrBibD7GZeLJpXld40=
   - secure: YCRcVBVdnigCuO+vJS3jOkaQBcZsAhIXPhBS7APWkVGFWju3cpj9L96MFteSVE74pJEeuLY7SV4ohkCvEOixmxOg8Fc+WsgRh9sygjb282ypjCbK3RWXuHsNzJSGwOOhVG2JGd/A0oe2qwCIHjwG1Uf3kKL/5T9WXmIh112ZPM8/rGlfUs2goLj0p9RBjru8AwFVF7nbxYIW6NCTbnzynwilJccXnSNF7g4lHuClOi/JFSWkaAfj3E/gNfT4yLbV6UGhqzq9AYwlitfNAvKWM7NeGhDxfg0N97rT+SyN5jwN4xO3BK9TSu02H21ZUBKHlYRiiT1bmt1GXgmvCCl7qOyUe9Fpx4Kh5ucNSWWoKPeh4Ldx81uTxgufGGiN1THszE83TaSA4kUaFkHEdNS4eOGwW+56dPuagaUithXINDkgjze6cNOd18x/SZr8G5a/M8oUkQy1Z0VV6cVlb1GKwTBxCkgGPQGxdj/Ob1aONxndcPPzjW4JwORXbxuUFsrM1HSDJqX6+y5I9iC0JZvsNw0U0Cy2gmbtLCQsOc4bAd9QOMkf1lfOiMgjRUqu06mryYXREZSRmoYUchn8OHKvWZVOpjI+SsrHryOKmgUajvxABZcsUUxwKS0lqXntTnEEuCm64agNS6HAh/4FdwxYcavkw6jcCWA9Nua+YL5hd3w=
+before_script:
+- ./publish_scripts/test_all.sh
+
 script:
 ### CLI ###
 - ./publish_scripts/publish_universal.sh cli vamp-cli
@@ -34,6 +41,5 @@ script:
 
 
 ### ROUTER ###
-
 - echo *** VAMP-ROUTER not yet included in build ****
 
