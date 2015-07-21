@@ -23,7 +23,7 @@ executableScriptName := "vamp"
 
 // ## RPM
 rpmVendor := "Magnetic.io"
-rpmUrl := Some("https://github.com/magneticio/vamp")
+rpmUrl := Some("http://vamp.io")
 rpmLicense := Some("Apache 2")
 
 // ### Docker

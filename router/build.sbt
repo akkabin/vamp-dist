@@ -20,7 +20,7 @@ maintainer := "Matthijs Dekker <matthijs@magnetic.io>"
 
 // ## RMP
 rpmVendor := "magnetic.io"
-rpmUrl := Some("https://github.com/magneticio/vamp")
+rpmUrl := Some("http://vamp.io")
 rpmLicense := Some("Apache 2")
 
 
