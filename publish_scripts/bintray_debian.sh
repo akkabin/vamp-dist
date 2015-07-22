@@ -30,7 +30,7 @@ ARCH=$7              #i386,amd64
 
 curl -v -T ${SOURCEPATH}/${DISTRIBUTABLE} \
   -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
-   https://api.bintray.com/content/plamola/${ARCH}/pool/vamp/v/${PACKAGE}/${DISTRIBUTABLE} \
+   https://api.bintray.com/content/plamola/${DISTRO}/pool/vamp/v/${PACKAGE}/${DISTRIBUTABLE} \
    -H "X-Bintray-Package:${PACKAGE}" \
    -H "X-Bintray-Version:${VERSION}" \
    -H "X-Bintray-Publish:1" \
