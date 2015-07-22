@@ -10,12 +10,12 @@ fi
 : ${BINTRAY_USER:?"No BINTRAY_USER set"}
 : ${BINTRAY_API_KEY:?"No BINTRAY_API_KEY set"}
 
-REPO=$1
+REPO=$1             #upstart | systemv
 PACKAGE=$2
 DISTRIBUTABLE=$3
 SOURCEPATH=$4        # target
 VERSION=$5
-DISTRO=$6            #jessie,wheezy
+DISTRO=$6            #jessie | wheezy
 COMPONENT=$7         #main
 ARCH=$8              #i386,amd64
 
@@ -32,7 +32,7 @@ ARCH=$8              #i386,amd64
 
 curl -v -T ${SOURCEPATH}/${DISTRIBUTABLE} \
   -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
-   https://api.bintray.com/content/plamola/${REPO}/pool/vamp/v/${PACKAGE}/${DISTRIBUTABLE} \
+   https://api.bintray.com/content/plamola/${REPO}/pool/${COMPONENT}/v/${PACKAGE}/${DISTRIBUTABLE} \
    -H "X-Bintray-Package:${PACKAGE}" \
    -H "X-Bintray-Version:${VERSION}" \
    -H "X-Bintray-Publish:1" \
