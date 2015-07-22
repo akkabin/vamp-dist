@@ -5,7 +5,7 @@ vamp_java_version_check() {
     readonly vamp_java_version=$("$java_cmd" -version 2>&1 | awk -F '"' '/version/ {print $2}')
     if [[ "$vamp_java_version" == "" ]]; then
         echo
-        echo Hi, it appears I cannot find your Java installation. I really Java 1.8+ to be installed.
+        echo Hi, it appears I cannot find your Java installation. I really need Java 1.8+ to be installed.
         echo Please check http://vamp.io/installation for details
         echo
         exit 1
