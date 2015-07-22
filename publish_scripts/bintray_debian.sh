@@ -41,5 +41,5 @@ ARCH=$7              #i386,amd64
 
 curl -v -T ${SOURCEPATH}/${DISTRIBUTABLE} \
   -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
-  https://api.bintray.com/content/magnetic-io/debian/${PACKAGE}/${VERSION}/${DISTRIBUTABLE};deb_distribution=${DISTRO};deb_component=${COMPONENT};deb_architecture=${ARCH};publish=1
+  https://api.bintray.com/content/plamola/deb/${PACKAGE}/${VERSION}/${DISTRIBUTABLE};deb_distribution=${DISTRO};deb_component=${COMPONENT};deb_architecture=${ARCH};publish=1
 
