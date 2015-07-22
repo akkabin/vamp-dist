@@ -28,12 +28,18 @@ ARCH=$7              #i386,amd64
 
 
 
+#curl -v -T ${SOURCEPATH}/${DISTRIBUTABLE} \
+#  -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
+#   https://api.bintray.com/content/magnetic-io/debian/pool/vamp/v/${PACKAGE}/${DISTRIBUTABLE} \
+#   -H "X-Bintray-Package:${PACKAGE}" \
+#   -H "X-Bintray-Version:${VERSION}" \
+#   -H "X-Bintray-Publish:1" \
+#   -H "X-Bintray-Debian-Distribution:${DISTRO}" \
+#   -H "X-Bintray-Debian-Component:${COMPONENT}" \
+#   -H "X-Bintray-Debian-Architecture:${ARCH}"
+
+
 curl -v -T ${SOURCEPATH}/${DISTRIBUTABLE} \
   -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
-   https://api.bintray.com/content/magnetic-io/debian/pool/vamp/v/${PACKAGE}/${DISTRIBUTABLE} \
-   -H "X-Bintray-Package:${PACKAGE}" \
-   -H "X-Bintray-Version:${VERSION}" \
-   -H "X-Bintray-Publish:1" \
-   -H "X-Bintray-Debian-Distribution:${DISTRO}" \
-   -H "X-Bintray-Debian-Component:${COMPONENT}" \
-   -H "X-Bintray-Debian-Architecture:${ARCH}"
+  https://api.bintray.com/content/magnetic-io/debian/${PACKAGE}/${VERSION}/${DISTRIBUTABLE};deb_distribution=${DISTRO};deb_component=${COMPONENT};deb_architecture=${ARCH};publish=1
+
