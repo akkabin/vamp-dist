@@ -5,7 +5,7 @@ import sbt.Keys._
 
 enablePlugins(DebianPlugin)
 
-version in ThisBuild := "0.7.8.3"
+version in ThisBuild := "0.7.8.4"
 val vampRouterVersion = "0.7.8"
 
 
