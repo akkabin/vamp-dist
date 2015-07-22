@@ -4,10 +4,10 @@ import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.8.3"
+version in ThisBuild := "0.7.8.4"
 
-val vampBootstrapVersion = "0.7.8-dev.f1866f8"
-val vampUiVersion = "0.0.2-49-dev"
+val vampBootstrapVersion = "0.7.9-rc.3080771"
+val vampUiVersion = "0.0.2-50-dev"
 
 libraryDependencies ++=Seq(
   "io.vamp" %% "core-bootstrap" % vampBootstrapVersion,
