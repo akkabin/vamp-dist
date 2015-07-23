@@ -64,7 +64,7 @@ addCommandAlias("packageDebianAll", "; clean " +
   "; set serverLoading in Debian := com.typesafe.sbt.packager.archetypes.ServerLoader.Upstart" +
   "; packageDebianUpstart"  +
   "; clean " +
-  "; set serverLoading in Debian := com.typesafe.sbt.packager.archetypes.ServerLoader.SystemD" +
+  "; set serverLoading in Debian := com.typesafe.sbt.packager.archetypes.ServerLoader.Systemd" +
   "; packageDebianSystemD"
 
 )
