@@ -4,7 +4,7 @@ import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.8.11"
+version in ThisBuild := "0.7.8.12"
 
 val vampBootstrapVersion = "0.7.9-rc.3080771"
 val vampUiVersion = "0.0.2-50-dev"
@@ -58,7 +58,7 @@ mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, sr
 
 bashScriptExtraDefines += """addJava "-Dlogback.configurationFile=${app_home}/../conf/logback.xml""""
 bashScriptExtraDefines += """addJava "-Dconfig.file=${app_home}/../conf/application.conf""""
-bashScriptExtraDefines +="""cd ${app_home}"""
+bashScriptExtraDefines +="""cd ${app_home}/../"""
 
 
 // Creating custom packageOutputs formats

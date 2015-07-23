@@ -4,7 +4,7 @@ import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.8.11"
+version in ThisBuild := "0.7.8.12"
 
 libraryDependencies ++=Seq(
   "io.vamp" %% "pulse-server" % "0.7.9-rc.ba83547"
@@ -53,7 +53,7 @@ mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, sr
 
 bashScriptExtraDefines += """addJava "-Dlogback.configurationFile=${app_home}/../conf/logback.xml""""
 bashScriptExtraDefines += """addJava "-Dconfig.file=${app_home}/../conf/application.conf""""
-bashScriptExtraDefines +="""cd ${app_home}"""
+bashScriptExtraDefines +="""cd ${app_home}/../"""
 
 // Creating custom packageOutputs formats
 
