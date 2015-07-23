@@ -4,7 +4,7 @@ import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.8.13"
+version in ThisBuild := "0.7.8.14"
 
 libraryDependencies ++=Seq(
   "io.vamp" %% "pulse-server" % "0.7.9-rc.ba83547"
@@ -46,10 +46,8 @@ mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, sr
   conf -> "conf/logback.xml"
 }
 
-mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
-  val conf = src / "main" / "resources" / "placeholder.txt"
-  conf -> "data/placeholder.txt"
-}
+// Add an empty folder to mappings
+linuxPackageMappings += packageTemplateMapping(s"/usr/share/${name.value}/data")() withUser(name.value) withGroup(name.value)
 
 bashScriptExtraDefines += """addJava "-Dlogback.configurationFile=${app_home}/../conf/logback.xml""""
 bashScriptExtraDefines += """addJava "-Dconfig.file=${app_home}/../conf/application.conf""""

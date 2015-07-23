@@ -29,7 +29,7 @@ VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/_all.deb//g`
 echo "*** Publishing ${DISTRIBUTABLE}, version ${VERSION} ***"
 
 ../publish_scripts/bintray_debian.sh wheezy ${PACKAGE} ${DISTRIBUTABLE} target ${VERSION} upstart main i386,amd64
-../publish_scripts/bintray_debian.sh sid    ${PACKAGE} ${DISTRIBUTABLE} target ${VERSION} systemv main i386,amd64
-../publish_scripts/bintray_debian.sh jessie ${PACKAGE} ${DISTRIBUTABLE} target ${VERSION} systemd main i386,amd64
+../publish_scripts/bintray_debian.sh jessie  ${PACKAGE} ${DISTRIBUTABLE} target ${VERSION} systemv main i386,amd64
+../publish_scripts/bintray_debian.sh systemd ${PACKAGE} ${DISTRIBUTABLE} target ${VERSION} systemd main i386,amd64
 
 cd ..
