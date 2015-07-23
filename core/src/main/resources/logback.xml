@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>logs/vamp-core.log</file>
-        <append>true</append>
+    <appender name="STDIN" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%cyan(%d{HH:mm:ss.SSS}) %highlight(| %-5level | %-40.40logger{40} | %-40.40X{akkaSource} | %msg%n)</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/application.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover. Make sure the path matches the one in the file element or else
+             the rollover logs are placed in the working directory. -->
+            <fileNamePattern>logs/application_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>5MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} | %-5level | %-40.40logger{40} | %-40.40X{akkaSource} | %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -15,6 +32,7 @@
     <logger name="io.vamp.core.persistence.slick.components" level="INFO" />
 
     <root level="INFO">
+        <appender-ref ref="STDIN" />
         <appender-ref ref="FILE"/>
     </root>
 
