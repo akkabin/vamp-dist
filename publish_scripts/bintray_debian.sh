@@ -10,12 +10,12 @@ fi
 : ${BINTRAY_USER:?"No BINTRAY_USER set"}
 : ${BINTRAY_API_KEY:?"No BINTRAY_API_KEY set"}
 
-REPO=$1             #upstart | systemv
+REPO=$1             #upstart / systemv / systemd
 PACKAGE=$2
 DISTRIBUTABLE=$3
 SOURCEPATH=$4        # target
 VERSION=$5
-DISTRO=$6            #jessie | wheezy
+DISTRO=$6            #trusty / wheezy / jessie
 COMPONENT=$7         #main
 ARCH=$8              #i386,amd64
 
