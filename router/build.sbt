@@ -26,6 +26,7 @@ maintainer := "Tim Nolet <tnolet@magnetic.io>"
 rpmVendor := "magnetic.io"
 rpmUrl := Some("http://vamp.io")
 rpmLicense := Some("Apache 2")
+
 packageArchitecture in Rpm := "x86_64"
 
 addCommandAlias("packageRPMAll", "" +
@@ -40,6 +41,8 @@ packageRPMx86 := {
   IO.move(rpmFile, output)
   output
 }
+
+
 
 // ### Docker
 packageSummary in Docker := "Vamp router"
@@ -71,18 +74,14 @@ ADD ./target/linux_i386/haproxy /usr/sbin/haproxy
 */
 
 
-//// removes all jar mappings in universal and appends the fat jar
-//mappings in Universal := {
-//  // universalMappings: Seq[(File,String)]
-//  val universalMappings = (mappings in Universal).value
-//  // removing means filtering
-//  val filtered = universalMappings filter {
-//    case (file, fileName) =>  ! fileName.endsWith(".jar")
-//  }
-//  // add the fat jar
-//  //filtered :+ (fatJar -> ("lib/" + fatJar.getName))
-//  filtered
-//}
+// removes all jar mappings in universal
+mappings in Universal := {
+  val universalMappings = (mappings in Universal).value
+  val filtered = universalMappings filter {
+    case (file, fileName) =>  ! fileName.endsWith(".jar")
+  }
+  filtered
+}
 
 
 resourceGenerators in Test += Def.task {
