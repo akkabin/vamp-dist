@@ -10,7 +10,7 @@ fi
 : ${BINTRAY_USER:?"No BINTRAY_USER set"}
 : ${BINTRAY_API_KEY:?"No BINTRAY_API_KEY set"}
 
-REPO=deb #$1             #upstart / systemv / systemd
+REPO=$1             #upstart / systemv / systemd
 PACKAGE=$2
 DISTRIBUTABLE=$3
 SOURCEPATH=$4        # target
