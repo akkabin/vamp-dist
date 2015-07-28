@@ -6,7 +6,7 @@ enablePlugins(JavaServerAppPackaging)
 
 version in ThisBuild := "0.7.8.15"
 
-val vampBootstrapVersion = "0.7.9-rc.196f1c2"
+val vampBootstrapVersion = "0.7.9-rc.e6e7ccb"
 val vampUiVersion = "0.0.2-64-dev"
 
 libraryDependencies ++=Seq(

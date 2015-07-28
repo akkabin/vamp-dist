@@ -1,0 +1,14 @@
+[Unit]
+Description=Vamp Router
+Requires=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/usr/share/vamp-router
+ExecStart=/usr/share/vamp-router/vamp-router
+Restart=always
+RestartSec=60
+User=vamp-router
+
+[Install]
+WantedBy=multi-user.target
