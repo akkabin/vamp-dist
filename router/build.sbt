@@ -29,14 +29,30 @@ rpmLicense := Some("Apache 2")
 
 packageArchitecture in Rpm := "x86_64"
 
-addCommandAlias("packageRPMAll", "" +
+addCommandAlias("packageRPMAll", "clean test" +
   "; set packageArchitecture in Rpm := \"x86_64\"" +
-  "; packageRPMx86")
+  "; packageRPMx86"+
+  "; clean test" +
+  "; set packageArchitecture in Rpm := \"amd64\"" +
+  "; packageRPMamd64")
 
 lazy val packageRPMx86 = taskKey[File]("creates RPM for the x86_64 platform")
+lazy val packageRPMamd64 = taskKey[File]("creates RPM for the amd64 platform")
+
 
 packageRPMx86 := {
+  val thisFile = IO.asFile(url(s"${target.value}/i386/vamp-router"))
+  linuxPackageMappings += packageMapping( (thisFile, "/usr/share/vamp-router/vamp-router") ) withPerms "744"
   val output = baseDirectory.value / "package" / "x86" / s"${name.value}-${version.value}-1.x86_64.rpm"
+  val rpmFile = (packageBin in Rpm).value
+  IO.move(rpmFile, output)
+  output
+}
+
+packageRPMamd64 := {
+  val thisFile = IO.asFile(url(s"${target.value}/amd64/vamp-router"))
+  linuxPackageMappings += packageMapping( (thisFile, "/usr/share/vamp-router/vamp-router") ) withPerms "744"
+  val output = baseDirectory.value / "package" / "amd64" / s"${name.value}-${version.value}-1.amd64.rpm"
   val rpmFile = (packageBin in Rpm).value
   IO.move(rpmFile, output)
   output
@@ -90,10 +106,17 @@ resourceGenerators in Test += Def.task {
 }.taskValue
 
 
-mappings in Universal <+= (packageBin in Compile, target ) map { (_, target) =>
-  val bin = target / "i386" / "vamp-router"
-  bin -> "vamp-router"
-}
+resourceGenerators in Test += Def.task {
+  val location = url(s"https://bintray.com/artifact/download/magnetic-io/downloads/vamp-router/vamp-router_${vampRouterVersion}_linux_amd84.zip")
+  IO.unzipURL(location, target.value / "amd64").toSeq
+}.taskValue
+
+
+
+//mappings in Universal <+= (packageBin in Compile, target ) map { (_, target) =>
+//  val bin = target / "i386" / "vamp-router"
+//  bin -> "vamp-router"
+//}
 
 mappings in Universal <+= (packageBin in Compile, target ) map { (_, target) =>
   val conf = target / "i386" / "configuration" / "error_pages"  / "500rate.http"
