@@ -18,10 +18,7 @@ anisble/playbooks/**/.vagrant/machines/
 .iml
 .idea/
 .iml
-cli/target/
-cli/project/target/
-core/target/
-core/project/target/
-pulse/target/
-pulse/project/target/
+target/
+.DS_Store
+
 

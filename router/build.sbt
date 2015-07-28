@@ -1,12 +1,12 @@
 import sbt.Classpaths._
 import sbt.Keys._
-//import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
+import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 
 
-enablePlugins(DebianPlugin)
+enablePlugins(JavaServerAppPackaging)
 
 version in ThisBuild := "0.7.8.4"
-val vampRouterVersion = "0.7.8"
+val vampRouterVersion = "0.7.8-dev"
 
 
 
@@ -16,13 +16,30 @@ name := "vamp-router"
 description := "The router of Vamp"
 packageDescription := "Very Awesome Microservices Platform"
 packageSummary := "Vamp Router"
-maintainer := "Matthijs Dekker <matthijs@magnetic.io>"
+maintainer := "Tim Nolet <tnolet@magnetic.io>"
 
-// ## RMP
+// ## RPM
+
+// TODO: set file permission on vamp-router executable
+// TODO: loop over all architectures, download zip, package.
+
 rpmVendor := "magnetic.io"
 rpmUrl := Some("http://vamp.io")
 rpmLicense := Some("Apache 2")
+packageArchitecture in Rpm := "x86_64"
 
+addCommandAlias("packageRPMAll", "" +
+  "; set packageArchitecture in Rpm := \"x86_64\"" +
+  "; packageRPMx86")
+
+lazy val packageRPMx86 = taskKey[File]("creates RPM for the x86_64 platform")
+
+packageRPMx86 := {
+  val output = baseDirectory.value / "package" / "x86" / s"${name.value}-${version.value}-1.x86_64.rpm"
+  val rpmFile = (packageBin in Rpm).value
+  IO.move(rpmFile, output)
+  output
+}
 
 // ### Docker
 packageSummary in Docker := "Vamp router"
@@ -126,13 +143,14 @@ debianPackageDependencies in Debian ++= Seq("haproxy", "bash (>= 2.05a-11)")
 
 
 // Creating custom packageOutputs formats
-
 addCommandAlias("packageDebianAll", "; clean " +
   "; set serverLoading in Debian := com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV" +
   "; packageDebianSystemV " +
   "; clean " +
   "; set serverLoading in Debian := com.typesafe.sbt.packager.archetypes.ServerLoader.Upstart" +
   "; packageDebianUpstart")
+
+
 
 lazy val packageDebianUpstart = taskKey[File]("creates deb-upstart package")
 lazy val packageDebianSystemV = taskKey[File]("creates deb-systenv package")
