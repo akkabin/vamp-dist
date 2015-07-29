@@ -31,6 +31,7 @@ rpmUrl := Some("http://vamp.io")
 rpmLicense := Some("Apache 2")
 
 packageArchitecture in Rpm := rpmArchitecture
+serverLoading in Rpm := Systemd
 
 // ### Docker
 packageSummary in Docker := "Vamp router"
@@ -132,21 +133,21 @@ lazy val packageDebianSystemD = taskKey[File]("creates deb-systemd package")
 
 
 packageDebianUpstart := {
-  val output = baseDirectory.value / "package" / "upstart" / debianPlatform / s"${name.value}-${version.value}.deb"
+  val output = baseDirectory.value / "package" / "upstart" / s"${name.value}-${version.value}.deb"
   val debianFile = (packageBin in Debian).value
   IO.move(debianFile, output)
   output
 }
 
 packageDebianSystemV := {
-  val output = baseDirectory.value / "package" / "systemv" / debianPlatform / s"${name.value}-${version.value}.deb"
+  val output = baseDirectory.value / "package" / "systemv" / s"${name.value}-${version.value}.deb"
   val debianFile = (packageBin in Debian).value
   IO.move(debianFile, output)
   output
 }
 
 packageDebianSystemD := {
-  val output = baseDirectory.value / "package" / "systemd" / debianPlatform / s"${name.value}-${version.value}.deb"
+  val output = baseDirectory.value / "package" / "systemd" / s"${name.value}-${version.value}.deb"
   val debianFile = (packageBin in Debian).value
   IO.move(debianFile, output)
   output
