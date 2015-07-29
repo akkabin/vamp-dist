@@ -1,4 +1,6 @@
 import sbt.Keys._
+import com.typesafe.sbt.packager.archetypes.ServerLoader
+import com.typesafe.sbt.packager.linux.LinuxSymlink
 
 enablePlugins(JavaServerAppPackaging)
 
@@ -30,7 +32,7 @@ rpmUrl := Some("http://vamp.io")
 rpmLicense := Some("Apache 2")
 
 packageArchitecture in Rpm := rpmArchitecture
-serverLoading in Rpm := Systemd
+serverLoading in Rpm := ServerLoader.Systemd
 
 // ### Docker
 packageSummary in Docker := "Vamp router"
@@ -71,13 +73,15 @@ mappings in Universal := {
   filtered
 }
 
+linuxPackageSymlinks += LinuxSymlink(link = "/usr/share/vamp-router/bin/vamp-router" , destination = "/usr/share/vamp-router/vamp-router")
+
 
 resourceGenerators in Compile += Def.task {
   val location = url(s"https://bintray.com/artifact/download/magnetic-io/downloads/vamp-router/vamp-router_${vampRouterVersion}_linux_$platform.zip")
   IO.unzipURL(location, target.value / platform).toSeq
 }.taskValue
 
-linuxPackageMappings += packageMapping( (target.value / platform / "vamp-router",  "/usr/share/vamp-router/vamp-router") ) withPerms "744"
+linuxPackageMappings += packageMapping( (target.value / platform / "vamp-router",  "/usr/share/vamp-router/vamp-router") ) withPerms "755"
 
 mappings in Universal <+= (packageBin in Compile, target ) map { (_, target) =>
   val conf = target / platform / "configuration" / "error_pages"  / "500rate.http"

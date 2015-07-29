@@ -1,4 +1,6 @@
 import sbt.Keys._
+import com.typesafe.sbt.packager.archetypes.ServerLoader
+import com.typesafe.sbt.packager.linux.LinuxSymlink
 
 enablePlugins(JavaServerAppPackaging)
 
@@ -7,7 +9,6 @@ val vampRouterVersion = "0.7.8-dev"
 
 
 val platform = "amd64"
-//val rpmArchitecture="amd64"
 val rpmArchitecture="x86_64"
 val debianPlatform = "amd64"
 
@@ -31,7 +32,7 @@ rpmUrl := Some("http://vamp.io")
 rpmLicense := Some("Apache 2")
 
 packageArchitecture in Rpm := rpmArchitecture
-serverLoading in Rpm := Systemd
+serverLoading in Rpm := ServerLoader.Systemd
 
 // ### Docker
 packageSummary in Docker := "Vamp router"
@@ -62,6 +63,16 @@ ADD ./examples /examples
 ADD ./target/linux_i386/haproxy /usr/sbin/haproxy
 */
 
+//linuxScriptReplacements = linuxScriptReplacements.filter( "desc" -> true) + ("descr" -> "Router for VAMP")
+//
+//
+//linuxScriptReplacements += {
+//  "exec" -> "../vamp-router"
+//}
+
+
+linuxPackageSymlinks += LinuxSymlink(link = "/usr/share/vamp-router/bin/vamp-router" , destination = "/usr/share/vamp-router/vamp-router")
+
 
 // removes all jar mappings in universal
 mappings in Universal := {
@@ -78,7 +89,7 @@ resourceGenerators in Compile += Def.task {
   IO.unzipURL(location, target.value / platform).toSeq
 }.taskValue
 
-linuxPackageMappings += packageMapping( (target.value / platform / "vamp-router",  "/usr/share/vamp-router/vamp-router") ) withPerms "744"
+linuxPackageMappings += packageMapping( (target.value / platform / "vamp-router",  "/usr/share/vamp-router/vamp-router") ) withPerms "755"
 
 mappings in Universal <+= (packageBin in Compile, target ) map { (_, target) =>
   val conf = target / platform / "configuration" / "error_pages"  / "500rate.http"
