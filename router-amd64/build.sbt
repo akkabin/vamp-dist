@@ -4,7 +4,7 @@ import com.typesafe.sbt.packager.linux.LinuxSymlink
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.8.5"
+version in ThisBuild := "0.7.8.7"
 val vampRouterVersion = "0.7.8-dev"
 
 
@@ -18,19 +18,14 @@ organization in ThisBuild := "io.vamp"
 name := "vamp-router"
 description := "The router of Vamp"
 packageDescription := "Very Awesome Microservices Platform"
-packageSummary := "Vamp Router"
+packageSummary := "Vamp Router Debian Package"
 maintainer := "Tim Nolet <tnolet@magnetic.io>"
 
+
 // ## RPM
-
-// TODO: set file permission on vamp-router executable
-// TODO: loop over all architectures, download zip, package.
-// TODO: Add symlink /usr/bin/vamp-router
-
 rpmVendor := "magnetic.io"
 rpmUrl := Some("http://vamp.io")
 rpmLicense := Some("Apache 2")
-
 packageArchitecture in Rpm := rpmArchitecture
 serverLoading in Rpm := ServerLoader.Systemd
 
@@ -42,36 +37,11 @@ dockerExposedPorts in Docker := Seq(80,1988,10001) // Ports to expose from conta
 dockerEntrypoint in Docker:= Seq("/vamp-router")
 dockerUpdateLatest := true
 
-/**
 
-# This Dockerfile does the basic install of vamp-router and Haproxy. Please see:
-# https://github.com/magneticio/vamp-router
-#
-# HAproxy is currently version 1.5.3 build from source on Ubuntu with the following options
-# apt-get install build-essential
-# apt-get install libpcre3-dev
-# make TARGET=linux26 ARCH=i386 USE_PCRE=1 USE_LINUX_SPLICE=1 USE_LINUX_TPROXY=1
-#
-#
-
-ADD ./target/linux_i386/vamp-router /vamp-router
-
-ADD ./configuration /configuration
-
-ADD ./examples /examples
-
-ADD ./target/linux_i386/haproxy /usr/sbin/haproxy
-*/
-
-//linuxScriptReplacements = linuxScriptReplacements.filter( "desc" -> true) + ("descr" -> "Router for VAMP")
-//
-//
-//linuxScriptReplacements += {
-//  "exec" -> "../vamp-router"
-//}
-
-
-linuxPackageSymlinks += LinuxSymlink(link = "/usr/share/vamp-router/bin/vamp-router" , destination = "/usr/share/vamp-router/vamp-router")
+resourceGenerators in Compile += Def.task {
+  val location = url(s"https://bintray.com/artifact/download/magnetic-io/downloads/vamp-router/vamp-router_${vampRouterVersion}_linux_$platform.zip")
+  IO.unzipURL(location, target.value / platform).toSeq
+}.taskValue
 
 
 // removes all jar mappings in universal
@@ -83,14 +53,22 @@ mappings in Universal := {
   filtered
 }
 
+// Add an empty folder for the data
+linuxPackageMappings += packageTemplateMapping(s"/usr/share/${name.value}/data")() withUser(name.value) withGroup(name.value)
 
-resourceGenerators in Compile += Def.task {
-  val location = url(s"https://bintray.com/artifact/download/magnetic-io/downloads/vamp-router/vamp-router_${vampRouterVersion}_linux_$platform.zip")
-  IO.unzipURL(location, target.value / platform).toSeq
-}.taskValue
+// Make the configuration directory writeable
+linuxPackageMappings += packageTemplateMapping(s"/usr/share/${name.value}/configuration")() withUser(name.value) withGroup(name.value)
 
+// copy vamp-router from the extracted bintray zip
 linuxPackageMappings += packageMapping( (target.value / platform / "vamp-router",  "/usr/share/vamp-router/vamp-router") ) withPerms "755"
 
+// Add the script file to which starts vamp-router
+mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
+  val bin = src / "templates" / "bash-template"
+  bin -> "bin/vamp-router"
+}
+
+// Add the config files
 mappings in Universal <+= (packageBin in Compile, target ) map { (_, target) =>
   val conf = target / platform / "configuration" / "error_pages"  / "500rate.http"
   conf -> "configuration/error_pages/500rate.http"
@@ -106,24 +84,9 @@ mappings in Universal <+= (packageBin in Compile, target ) map { (_, target) =>
   conf -> "examples/example1.json"
 }
 
+
+// ## Debian
 debianPackageDependencies in Debian ++= Seq("haproxy", "bash (>= 2.05a-11)")
-
-//
-//addCommandAlias("packageRpmAll", "; clean" +
-//  "; packageRpmArchitecture"
-//)
-//
-//lazy val packageRpmArchitecture = taskKey[File]("creates RPM package and stores result in package / $rpmArchitecture")
-//
-//
-//packageRpmArchitecture := {
-//  val output = baseDirectory.value / "package" / rpmArchitecture / s"${name.value}-${version.value}-1.$rpmArchitecture.rpm"
-//  val rpmFile = (packageBin in Rpm).value
-//  IO.move(rpmFile, output)
-//  output
-//}
-
-
 
 // Creating custom packageOutputs formats
 addCommandAlias("packageDebianAll", "; clean " +
@@ -163,10 +126,5 @@ packageDebianSystemD := {
   IO.move(debianFile, output)
   output
 }
-
-
-
-
-
 
 

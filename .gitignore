@@ -19,6 +19,7 @@ anisble/playbooks/**/.vagrant/machines/
 .idea/
 .iml
 target/
+package/
 .DS_Store
 
 

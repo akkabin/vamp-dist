@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Work-around: packaging expects the binary to be located in the bin directory
+cd /usr/share/vamp-router && \
+./vamp-router \
+  -customWorkDir="/usr/share/vamp-router/data/" \
+&& cd -

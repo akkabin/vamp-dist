@@ -4,7 +4,7 @@ import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.8.21"
+version in ThisBuild := "0.7.8.22"
 
 val vampBootstrapVersion = "0.7.9-rc.e6e7ccb"
 val vampUiVersion = "0.0.2-64-dev"
