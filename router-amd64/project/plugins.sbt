@@ -7,8 +7,4 @@ resolvers += Classpaths.sbtPluginReleases
 
 resolvers += Classpaths.typesafeReleases
 
-addSbtPlugin("me.lessis" % "bintray-sbt" % "0.2.1")
-
-addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.13.0")
-
-addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.0.1")
+addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.0.3")
