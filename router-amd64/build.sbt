@@ -4,7 +4,7 @@ import com.typesafe.sbt.packager.linux.LinuxSymlink
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.8.7"
+version in ThisBuild := "0.7.8.8"
 val vampRouterVersion = "0.7.8-dev"
 
 
@@ -107,21 +107,21 @@ lazy val packageDebianSystemD = taskKey[File]("creates deb-systemd package")
 
 
 packageDebianUpstart := {
-  val output = baseDirectory.value / "package" / "upstart" / s"${name.value}-${version.value}.deb"
+  val output = baseDirectory.value / "package" / "upstart" / s"${name.value}-${version.value}_$debianPlatform.deb"
   val debianFile = (packageBin in Debian).value
   IO.move(debianFile, output)
   output
 }
 
 packageDebianSystemV := {
-  val output = baseDirectory.value / "package" / "systemv" / s"${name.value}-${version.value}.deb"
+  val output = baseDirectory.value / "package" / "systemv" / s"${name.value}-${version.value}_$debianPlatform.deb"
   val debianFile = (packageBin in Debian).value
   IO.move(debianFile, output)
   output
 }
 
 packageDebianSystemD := {
-  val output = baseDirectory.value / "package" / "systemd" / s"${name.value}-${version.value}.deb"
+  val output = baseDirectory.value / "package" / "systemd" / s"${name.value}-${version.value}_$debianPlatform.deb"
   val debianFile = (packageBin in Debian).value
   IO.move(debianFile, output)
   output

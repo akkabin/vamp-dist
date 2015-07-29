@@ -4,7 +4,7 @@ import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.8.22"
+version in ThisBuild := "0.7.8.23"
 
 val vampBootstrapVersion = "0.7.9-rc.e6e7ccb"
 val vampUiVersion = "0.0.2-64-dev"
@@ -78,21 +78,21 @@ lazy val packageDebianSystemV = taskKey[File]("creates deb-systemv package")
 lazy val packageDebianSystemD = taskKey[File]("creates deb-systemd package")
 
 packageDebianUpstart := {
-  val output = baseDirectory.value / "package" / "upstart" / s"${name.value}-${version.value}.deb"
+  val output = baseDirectory.value / "package" / "upstart" / s"${name.value}-${version.value}_all.deb"
   val debianFile = (packageBin in Debian).value
   IO.move(debianFile, output)
   output
 }
 
 packageDebianSystemV := {
-  val output = baseDirectory.value / "package" / "systemv" / s"${name.value}-${version.value}.deb"
+  val output = baseDirectory.value / "package" / "systemv" / s"${name.value}-${version.value}_all.deb"
   val debianFile = (packageBin in Debian).value
   IO.move(debianFile, output)
   output
 }
 
 packageDebianSystemD := {
-  val output = baseDirectory.value / "package" / "systemd" / s"${name.value}-${version.value}.deb"
+  val output = baseDirectory.value / "package" / "systemd" / s"${name.value}-${version.value}_all.deb"
   val debianFile = (packageBin in Debian).value
   IO.move(debianFile, output)
   output

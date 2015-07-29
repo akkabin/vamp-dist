@@ -24,7 +24,7 @@ sbt packageDebianAll
 
 # publish upstart version
 DISTRIBUTABLE=`ls package/upstart/${PACKAGE}-*.deb | xargs -n1 basename`
-VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/.deb//g`
+VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/\_.*//`
 
 : ${DISTRIBUTABLE:?"not set"}
 : ${VERSION:?"not set"}
@@ -36,7 +36,7 @@ echo "*** Publishing ${DISTRIBUTABLE} [version ${VERSION}, upstart] ***"
 
 # publish systemv version
 DISTRIBUTABLE=`ls package/systemv/${PACKAGE}-*.deb | xargs -n1 basename`
-VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/.deb//g`
+VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/\_.*//`
 
 : ${DISTRIBUTABLE:?"not set"}
 : ${VERSION:?"not set"}
@@ -47,7 +47,7 @@ echo "*** Publishing ${DISTRIBUTABLE} [version ${VERSION}, systemv] ***"
 
 # publish systemv version
 DISTRIBUTABLE=`ls package/systemd/${PACKAGE}-*.deb | xargs -n1 basename`
-VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/.deb//g`
+VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/\_.*//g`
 
 : ${DISTRIBUTABLE:?"not set"}
 : ${VERSION:?"not set"}
