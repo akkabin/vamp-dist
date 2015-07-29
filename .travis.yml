@@ -29,21 +29,30 @@ script:
 ### CLI ###
 - ./publish_scripts/publish_universal.sh cli vamp-cli
 - ./publish_scripts/publish_debian_client.sh cli vamp-cli
-- ./publish_scripts/publish_rpm.sh cli vamp-cli
+- ./publish_scripts/publish_rpm.sh cli vamp-cli noarch
 
 ### CORE ###
 - ./publish_scripts/publish_universal.sh core vamp-core
-- ./publish_scripts/publish_debian_server.sh core vamp-core
-- ./publish_scripts/publish_rpm.sh core vamp-core
+- ./publish_scripts/publish_debian_server.sh core vamp-core i386,amd64
+- ./publish_scripts/publish_rpm.sh core vamp-core noarch
 
 ### PULSE ###
 - ./publish_scripts/publish_universal.sh pulse vamp-pulse
-- ./publish_scripts/publish_debian_server.sh pulse vamp-pulse
-- ./publish_scripts/publish_rpm.sh pulse vamp-pulse
+- ./publish_scripts/publish_debian_server.sh pulse vamp-pulse i386,amd64
+- ./publish_scripts/publish_rpm.sh pulse vamp-pulse noarch
 
 
 ### ROUTER ###
-- echo *** VAMP-ROUTER not yet included in build ****
+
+# Not publishing universal -> already done via vamp-router project
+
+- ./publish_scripts/publish_debian_server.sh router-i386 vamp-router i386
+- ./publish_scripts/publish_debian_server.sh router-amd64 vamp-router amd64
+
+# RPM only published as 64bit
+- ./publish_scripts/publish_rpm.sh router-amd64 vamp-router x86_64
+
+
 
 # Trick to avoid unnecessary cache updates
 - find $HOME/.sbt -name "*.lock" | xargs rm

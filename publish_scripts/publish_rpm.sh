@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -e
 # Check number of args
-if [ "$#" -ne 2 ]; then
+if [ "$#" -ne 3 ]; then
     SCRIPTNAME=$(basename "$0")
-    echo "Usage: ${SCRIPTNAME} <directory-name> <package-name>"
+    echo "Usage: ${SCRIPTNAME} <directory-name> <package-name> <architecture>"
     exit 1
 fi
 
@@ -15,6 +15,9 @@ fi
 cd $1
 #arg 2 = package
 PACKAGE=$2
+#arg 3 = architecture
+ARCH=$3
+
 
 echo "*** Building ${PACKAGE} ***"
 
@@ -28,6 +31,6 @@ VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/-1.noarch.rpm//g`
 
 echo "*** Publishing ${DISTRIBUTABLE}, version ${VERSION} ***"
 
-../publish_scripts/bintray_rpm.sh ${PACKAGE} ${DISTRIBUTABLE} target/rpm/RPMS/noarch ${VERSION}
+../publish_scripts/bintray_rpm.sh ${PACKAGE} ${DISTRIBUTABLE} target/rpm/RPMS/${ARCH} ${VERSION}
 
 cd ..

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -e
 # Check number of args
-if [ "$#" -ne 2 ]; then
+if [ "$#" -ne 3 ]; then
     SCRIPTNAME=$(basename "$0")
-    echo "Usage: ${SCRIPTNAME} <directory-name> <package-name>"
+    echo "Usage: ${SCRIPTNAME} <directory-name> <package-name> <architecture>"
     exit 1
 fi
 
@@ -15,6 +15,8 @@ fi
 cd $1
 #arg 2 = package
 PACKAGE=$2
+#arg 3 = architecture
+ARCH=$3
 
 echo "*** Building ${PACKAGE} ***"
 
@@ -29,7 +31,7 @@ VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/.deb//g`
 
 echo "*** Publishing ${DISTRIBUTABLE} [version ${VERSION}, upstart] ***"
 
-../publish_scripts/bintray_debian.sh upstart ${PACKAGE} ${DISTRIBUTABLE} package/upstart ${VERSION} trusty main i386,amd64
+../publish_scripts/bintray_debian.sh upstart ${PACKAGE} ${DISTRIBUTABLE} package/upstart ${VERSION} trusty main ${ARCH}
 
 
 # publish systemv version
@@ -41,7 +43,7 @@ VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/.deb//g`
 
 echo "*** Publishing ${DISTRIBUTABLE} [version ${VERSION}, systemv] ***"
 
-../publish_scripts/bintray_debian.sh  systemv ${PACKAGE} ${DISTRIBUTABLE}  package/systemv ${VERSION} wheezy main i386,amd64
+../publish_scripts/bintray_debian.sh  systemv ${PACKAGE} ${DISTRIBUTABLE}  package/systemv ${VERSION} wheezy main ${ARCH}
 
 # publish systemv version
 DISTRIBUTABLE=`ls package/systemd/${PACKAGE}-*.deb | xargs -n1 basename`
@@ -52,7 +54,7 @@ VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/.deb//g`
 
 echo "*** Publishing ${DISTRIBUTABLE} [version ${VERSION}, systemd] ***"
 
-../publish_scripts/bintray_debian.sh systemd ${PACKAGE} ${DISTRIBUTABLE}  package/systemd ${VERSION} jessie main i386,amd64
+../publish_scripts/bintray_debian.sh systemd ${PACKAGE} ${DISTRIBUTABLE}  package/systemd ${VERSION} jessie main ${ARCH}
 
 
 cd ..
