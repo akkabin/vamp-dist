@@ -29,34 +29,31 @@ rpmLicense := Some("Apache 2")
 
 packageArchitecture in Rpm := "x86_64"
 
-addCommandAlias("packageRPMAll", "clean test" +
+addCommandAlias("packageRPMAll", "clean; test" +
   "; set packageArchitecture in Rpm := \"x86_64\"" +
-  "; packageRPMx86"+
-  "; clean test" +
-  "; set packageArchitecture in Rpm := \"amd64\"" +
-  "; packageRPMamd64")
+  "; packageRPMx86")
 
 lazy val packageRPMx86 = taskKey[File]("creates RPM for the x86_64 platform")
 lazy val packageRPMamd64 = taskKey[File]("creates RPM for the amd64 platform")
 
 
 packageRPMx86 := {
-  val thisFile = IO.asFile(url(s"${target.value}/i386/vamp-router"))
-  linuxPackageMappings += packageMapping( (thisFile, "/usr/share/vamp-router/vamp-router") ) withPerms "744"
-  val output = baseDirectory.value / "package" / "x86" / s"${name.value}-${version.value}-1.x86_64.rpm"
+  val thisFile = target.value / "i386" / "vamp-router"
+  linuxPackageMappings += packageMapping( (thisFile,  "/usr/share/vamp-router/vamp-router") ) withPerms "744"
+  val output = baseDirectory.value / "package" / "x86_64" / s"${name.value}-${version.value}-1.x86_64.rpm"
   val rpmFile = (packageBin in Rpm).value
   IO.move(rpmFile, output)
   output
 }
 
-packageRPMamd64 := {
-  val thisFile = IO.asFile(url(s"${target.value}/amd64/vamp-router"))
-  linuxPackageMappings += packageMapping( (thisFile, "/usr/share/vamp-router/vamp-router") ) withPerms "744"
-  val output = baseDirectory.value / "package" / "amd64" / s"${name.value}-${version.value}-1.amd64.rpm"
-  val rpmFile = (packageBin in Rpm).value
-  IO.move(rpmFile, output)
-  output
-}
+//packageRPMamd64 := {
+//  val thisFile = target.value / "amd64" / "vamp-router"
+//  linuxPackageMappings += packageMapping( (thisFile, "/usr/share/vamp-router/vamp-router") ) withPerms "744"
+//  val output = baseDirectory.value / "package" / "amd64" / s"${name.value}-${version.value}-1.amd64.rpm"
+//  val rpmFile = (packageBin in Rpm).value
+//  IO.move(rpmFile, output)
+//  output
+//}
 
 
 
@@ -100,21 +97,25 @@ mappings in Universal := {
 }
 
 
-resourceGenerators in Test += Def.task {
+resourceGenerators in Compile += Def.task {
   val location = url(s"https://bintray.com/artifact/download/magnetic-io/downloads/vamp-router/vamp-router_${vampRouterVersion}_linux_386.zip")
   IO.unzipURL(location, target.value / "i386").toSeq
 }.taskValue
 
 
-resourceGenerators in Test += Def.task {
-  val location = url(s"https://bintray.com/artifact/download/magnetic-io/downloads/vamp-router/vamp-router_${vampRouterVersion}_linux_amd84.zip")
-  IO.unzipURL(location, target.value / "amd64").toSeq
-}.taskValue
+//resourceGenerators in Compile += Def.task {
+//  val location = url(s"https://bintray.com/artifact/download/magnetic-io/downloads/vamp-router/vamp-router_${vampRouterVersion}_linux_amd64.zip")
+//  IO.unzipURL(location, target.value / "amd64").toSeq
+//}.taskValue
 
 
-
-//mappings in Universal <+= (packageBin in Compile, target ) map { (_, target) =>
-//  val bin = target / "i386" / "vamp-router"
+//
+//mappings in Rpm <+= (packageBin in Compile, target ) map { (_, target) =>
+//  val bin = packageArchitecture.value match {
+//    case "x86_64"  =>  target / "i386" / "vamp-router"
+//    case _ =>    target / "amd64" / "vamp-router"
+//  }
+//  //val bin = target / "i386" / "vamp-router"
 //  bin -> "vamp-router"
 //}
 
