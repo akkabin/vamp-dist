@@ -4,7 +4,7 @@ import com.typesafe.sbt.packager.linux.LinuxSymlink
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.8.8"
+version in ThisBuild := "0.7.8.25"
 val vampRouterVersion = "0.7.8-dev"
 
 
