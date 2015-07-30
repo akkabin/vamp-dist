@@ -29,10 +29,9 @@ ARCH=$8              #i386,amd64
 : ${ARCH:?"Not set"}
 
 
-
 curl -v -T ${SOURCEPATH}/${DISTRIBUTABLE} \
   -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
-   https://api.bintray.com/content/plamola/${REPO}/pool/${COMPONENT}/v/${PACKAGE}/${DISTRIBUTABLE} \
+   https://api.bintray.com/content/magnetic-io/${REPO}/pool/${COMPONENT}/v/${PACKAGE}/${DISTRIBUTABLE} \
    -H "X-Bintray-Package:${PACKAGE}" \
    -H "X-Bintray-Version:${VERSION}" \
    -H "X-Bintray-Publish:1" \
@@ -40,6 +39,5 @@ curl -v -T ${SOURCEPATH}/${DISTRIBUTABLE} \
    -H "X-Bintray-Debian-Component:${COMPONENT}" \
    -H "X-Bintray-Debian-Architecture:${ARCH}"
 
-   #https://api.bintray.com/content/magnetic-io/${REPO}/pool/vamp/v/${PACKAGE}/${DISTRIBUTABLE} \
 
 
