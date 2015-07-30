@@ -1,14 +1,11 @@
 #Installing on Google VM Instance (Debian - Wheezy)
 
-Here are some instructions to setup a Google VM instance (debian)
+Here are some instructions to setup a Google VM instance (Ubuntu 14.04 LTS)
 
 ```bash
 
-# enable https downloads
-sudo apt-get install apt-transport-https
-
 # add vamp repo
-sudo echo "deb https://dl.bintray.com/magnetic-io/systemv wheezy main" | sudo tee -a /etc/apt/sources.list
+sudo echo "deb https://dl.bintray.com/magnetic-io/upstart trusty main" | sudo tee -a /etc/apt/sources.list
 
 
 #add java
@@ -22,15 +19,19 @@ sudo apt-get install oracle-java8-installer
 sudo curl -sSL https://get.docker.com/ | sudo sh
 
 #add haproxy 
-sudo apt-get install haproxy
+sudo add-apt-repository -y ppa:vbernat/haproxy-1.5
+sudo apt-get update
+sudo apt-get install -y haproxy
 
 
 #install vamp
-sudo apt-get install -y vamp-pulse vamp-cli vamp-core vamp-router
+sudo apt-get install -y vamp-pulse vamp-cli vamp-core vamp-router 
 
 #give vamp-core access to docker 
 sudo usermod -aG docker vamp-core 
 sudo service vamp-core restart
+
+
 
 
 

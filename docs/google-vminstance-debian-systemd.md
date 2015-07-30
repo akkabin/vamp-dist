@@ -26,26 +26,15 @@ sudo mkdir -p /etc/apt/sources.list.d
 sudo echo deb https://apt.dockerproject.org/repo debian-jessie main > sudo /etc/apt/sources.list.d/docker.list
 sudo apt-get update; sudo apt-get install -y -q docker-engine
 
+#add haproxy 
+sudo apt-get install haproxy
+
+
 #install vamp
-sudo apt-get install vamp-pulse vamp-cli vamp-core  vamp-router
+sudo apt-get install -y vamp-pulse vamp-cli vamp-core  vamp-router
 
 
 #give vamp-core access to docker 
 sudo usermod -aG docker vamp-core 
 sudo service vamp-core restart
 
-
-
-#install vamp-router
-curl -L -o /tmp/vamp-router.zip https://bintray.com/artifact/download/magnetic-io/downloads/vamp-router/vamp-router_0.7.8_linux_amd64.zip
-sudo apt-get install unzip
-sudo unzip /tmp/vamp-router -d /usr/share/vamp-router/
-sudo useradd -d /bin/false vamp-router
-
-
-
-#run vamp-router non daemonized
-cd /usr/share/vamp-router/
-./vamp-router
-
-```
