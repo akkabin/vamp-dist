@@ -19,7 +19,7 @@ organization in ThisBuild := "io.vamp"
 name := "vamp-core"
 description := "The brain of Vamp"
 packageDescription := "Very Awesome Microservices Platform"
-packageSummary := "Vamp Core"
+packageSummary := "The Core of Vamp"
 maintainer := "Matthijs Dekker <matthijs@magnetic.io>"
 
 // ###  Debian

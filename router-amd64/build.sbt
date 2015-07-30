@@ -18,7 +18,7 @@ organization in ThisBuild := "io.vamp"
 name := "vamp-router"
 description := "The router of Vamp"
 packageDescription := "Very Awesome Microservices Platform"
-packageSummary := "Vamp Router Debian Package"
+packageSummary := "The router of Vamp"
 maintainer := "Tim Nolet <tnolet@magnetic.io>"
 
 

@@ -16,7 +16,7 @@ organization in ThisBuild := "io.vamp"
 name := "vamp-pulse"
 description := "Pulse is an event consumption/retrieval/aggregation application"
 packageDescription := "Very Awsome Microservices Platform"
-packageSummary := "Vamp Pulse"
+packageSummary := "The event store of Vamp"
 maintainer := "Matthijs Dekker <matthijs@magnetic.io>"
 
 // ###  Debian
