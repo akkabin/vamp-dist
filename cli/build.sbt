@@ -4,10 +4,10 @@ import sbtassembly.AssemblyPlugin.autoImport._
 
 enablePlugins(JavaAppPackaging)
 
-version in ThisBuild := "0.7.8.25"
+version in ThisBuild := "0.7.8.50"
 
 libraryDependencies ++=Seq(
-  "io.vamp" %% "core-cli" % "0.7.9-rc.3080771"
+  "io.vamp" %% "core-cli" % "0.7.9"
 )
 
 
@@ -42,6 +42,8 @@ packageName in Docker := "vamp-cli" // Only add this if you want to rename your 
 // ###  Build
 scalaVersion := "2.11.6"
 scalaVersion in ThisBuild := scalaVersion.value
+
+resolvers in ThisBuild += Resolver.url("magnetic-io ivy resolver", url("http://dl.bintray.com/magnetic-io/vamp"))(Resolver.ivyStylePatterns)
 
 resolvers in ThisBuild ++= Seq(
   Resolver.typesafeRepo("releases"),

@@ -4,10 +4,10 @@ import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.8.25"
+version in ThisBuild := "0.7.8.50"
 
 libraryDependencies ++=Seq(
-  "io.vamp" %% "pulse-server" % "0.7.9-rc.ba83547"
+  "io.vamp" %% "pulse-server" % "0.7.9"
 )
 
 
@@ -97,6 +97,7 @@ packageDebianSystemD := {
 scalaVersion := "2.11.6"
 scalaVersion in ThisBuild := scalaVersion.value
 
+resolvers in ThisBuild += Resolver.url("magnetic-io ivy resolver", url("http://dl.bintray.com/magnetic-io/vamp"))(Resolver.ivyStylePatterns)
 resolvers in ThisBuild ++= Seq(
   "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/",
   Resolver.jcenterRepo
