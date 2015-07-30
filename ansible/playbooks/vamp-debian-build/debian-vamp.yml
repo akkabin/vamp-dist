@@ -1,9 +1,0 @@
----
-- hosts: debian-build-servers
-  user: vagrant
-  sudo: yes
-  roles:
-    - java8
-    - common-utils
-    - vamp-build-tools
-
