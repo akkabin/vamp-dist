@@ -16,4 +16,7 @@ cd pulse
 sbt clean test
 cd ..
 
+## ROUTER is not tested, since it has no test actions in build.sbt
+
+
 echo "Done testing"
