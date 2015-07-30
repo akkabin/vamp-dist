@@ -8,11 +8,9 @@ Here are some instructions to setup a Google VM instance (debian)
 sudo apt-get install apt-transport-https
 
 # add vamp repo
-sudo echo "deb https://dl.bintray.com/plamola/systemd systemd main" | sudo tee -a /etc/apt/sources.list
+sudo echo "deb https://dl.bintray.com/magnetic-io/systemd jessie main" | sudo tee -a /etc/apt/sources.list
 
 
-# or vamp systemv
-sudo echo "deb https://dl.bintray.com/plamola/jessie systemv main" | sudo tee -a /etc/apt/sources.list
 
 
 #add java
@@ -29,7 +27,7 @@ sudo echo deb https://apt.dockerproject.org/repo debian-jessie main > sudo /etc/
 sudo apt-get update; sudo apt-get install -y -q docker-engine
 
 #install vamp
-sudo apt-get install vamp-pulse vamp-cli vamp-core
+sudo apt-get install vamp-pulse vamp-cli vamp-core  vamp-router
 
 
 #give vamp-core access to docker 
