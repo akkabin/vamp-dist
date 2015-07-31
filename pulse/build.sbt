@@ -16,12 +16,10 @@ organization in ThisBuild := "io.vamp"
 name := "vamp-pulse"
 description := "Pulse is an event consumption/retrieval/aggregation application"
 packageDescription :=
-  """
-    |Pulse component of the Very Awesome Microservices Platform
+  """Pulse component of the Very Awesome Microservices Platform
     |Consumes metrics from Vamp Router (using SSE or Kafka feeds) and consumes events from Vamp Core through REST.
     |Makes everything searchable and actionable.
-    |Runs on Elasticsearch.
-  """.stripMargin
+    |Runs on Elasticsearch.""".stripMargin
 packageSummary := "The event store of Vamp"
 maintainer := "Matthijs Dekker <matthijs@magnetic.io>"
 

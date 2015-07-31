@@ -18,12 +18,9 @@ organization in ThisBuild := "io.vamp"
 name := "vamp-router"
 description := "The router of Vamp"
 packageDescription :=
-  """
-    |Router component of the Very Awesome Microservices Platform
-    |
+  """Router component of the Very Awesome Microservices Platform
     |Controls HAproxy, creates data feeds from routing information.
-    |Gets instructions from Vamp Core through REST and offers SSE and/or Kafka feeds of metric data to Vamp Pulse.
-  """.stripMargin
+    |Gets instructions from Vamp Core through REST and offers SSE and/or Kafka feeds of metric data to Vamp Pulse.""".stripMargin
 packageSummary := "The router of Vamp"
 maintainer := "Tim Nolet <tnolet@magnetic.io>"
 
