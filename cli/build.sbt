@@ -15,8 +15,13 @@ libraryDependencies ++=Seq(
 organization in ThisBuild := "io.vamp"
 name := "vamp-cli"
 description := "This is the command line interface for VAMP"
+packageDescription :=
+  """
+    | CLI for the Very Awesome Microservices Platform"
+    |
+    | Command line interface for managing Vamp and integration with (shell) scripts.
+  """.stripMargin
 packageSummary := "The Vamp CLI"
-packageDescription := "Very Awesome Microservices Platform CLI"
 maintainer :=  "Matthijs Dekker <matthijs@magnetic.io>"
 
 executableScriptName := "vamp"
@@ -86,3 +91,14 @@ scriptClasspath := Seq( (assemblyJarName in assembly).value )
 
 // Add check for Java 8 (not for windows)
 bashScriptExtraDefines ++= IO.readLines(baseDirectory.value / "scripts" / "java_check.sh")
+
+val downloadLicense = taskKey[File]("Downloads the latest license file.")
+
+downloadLicense := {
+  val location = target.value / "downloads" / "LICENSE"
+  location.getParentFile.mkdirs()
+  IO.download(url("https://raw.githubusercontent.com/magneticio/vamp-dist/master/LICENSE"), location)
+  location
+}
+
+mappings in Universal += downloadLicense.value -> "LICENSE"

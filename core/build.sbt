@@ -18,12 +18,21 @@ libraryDependencies ++=Seq(
 organization in ThisBuild := "io.vamp"
 name := "vamp-core"
 description := "The brain of Vamp"
-packageDescription := "Very Awesome Microservices Platform"
-packageSummary := "The Core of Vamp"
+packageDescription :=
+  """
+    |Core component of the Very Awesome Microservices Platform
+    |
+    |Main API endpoint, business logic and service coordinator.
+    |Talks to the configured container manager (Docker, Marathon etc.) and synchronizes it with Vamp Router.
+    |Reads metrics from Vamp Pulse and archives life cycle events to Vamp Pulse.
+    |Uses a standard JDBC database for persistence (H2 and MySQL are tested).
+    |""".stripMargin
+packageSummary := "The core of Vamp"
 maintainer := "Matthijs Dekker <matthijs@magnetic.io>"
 
 // ###  Debian
 serverLoading in Debian := SystemV
+val debianPlatform = "all"
 
 // ## RMP
 rpmVendor := "magnetic.io"
@@ -32,7 +41,7 @@ rpmLicense := Some("Apache 2")
 
 
 // ### Docker
-packageSummary in Docker := "Vamp Core"
+packageSummary in Docker := "The Core of Vamp"
 packageName in Docker := "magneticio/vamp-core" // Only add this if you want to rename your docker image name
 dockerBaseImage := "java:8" // Docker image to use as a base for the application image
 dockerExposedPorts in Docker := Seq(8080) // Ports to expose from container for Docker container linking
