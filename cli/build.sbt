@@ -15,9 +15,7 @@ libraryDependencies ++=Seq(
 organization in ThisBuild := "io.vamp"
 name := "vamp-cli"
 description := "This is the command line interface for VAMP"
-packageDescription :=
-  """CLI for the Very Awesome Microservices Platform"
-    | Command line interface for managing Vamp and integration with (shell) scripts.""".stripMargin
+packageDescription := "CLI for the Very Awesome Microservices Platform"
 packageSummary := "The Vamp CLI"
 maintainer :=  "Matthijs Dekker <matthijs@magnetic.io>"
 

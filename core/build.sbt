@@ -18,12 +18,7 @@ libraryDependencies ++=Seq(
 organization in ThisBuild := "io.vamp"
 name := "vamp-core"
 description := "The brain of Vamp"
-packageDescription :=
-  """Core component of the Very Awesome Microservices Platform
-    |Main API endpoint, business logic and service coordinator.
-    |Talks to the configured container manager (Docker, Marathon etc.) and synchronizes it with Vamp Router.
-    |Reads metrics from Vamp Pulse and archives life cycle events to Vamp Pulse.
-    |Uses a standard JDBC database for persistence (H2 and MySQL are tested).""".stripMargin
+packageDescription := "Core component of the Very Awesome Microservices Platform"
 packageSummary := "The core of Vamp"
 maintainer := "Matthijs Dekker <matthijs@magnetic.io>"
 
