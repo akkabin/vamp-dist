@@ -4,7 +4,7 @@ import com.typesafe.sbt.packager.linux.LinuxSymlink
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.9.1"
+version in ThisBuild := "0.7.9.2"
 val vampRouterVersion = "0.7.9"
 
 
@@ -87,6 +87,9 @@ mappings in Universal <+= (packageBin in Compile, target ) map { (_, target) =>
 
 // ## Debian
 debianPackageDependencies in Debian ++= Seq("haproxy", "bash (>= 2.05a-11)")
+packageArchitecture in Debian := debianPlatform
+debianSection in Debian := "net"
+
 
 // Creating custom packageOutputs formats
 addCommandAlias("packageDebianAll", "; clean " +

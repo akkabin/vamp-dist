@@ -4,13 +4,13 @@ import com.typesafe.sbt.packager.linux.LinuxSymlink
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.9.1"
+version in ThisBuild := "0.7.9.2"
 val vampRouterVersion = "0.7.9"
 
 
 val platform = "amd64"
 val rpmArchitecture="x86_64"
-val debianPlatform = "amd64"
+val debianArchitecture = "amd64"
 
 
 // ### Organisation
@@ -87,6 +87,8 @@ mappings in Universal <+= (packageBin in Compile, target ) map { (_, target) =>
 
 // ## Debian
 debianPackageDependencies in Debian ++= Seq("haproxy", "bash (>= 2.05a-11)")
+packageArchitecture in Debian := debianArchitecture
+debianSection in Debian := "net"
 
 // Creating custom packageOutputs formats
 addCommandAlias("packageDebianAll", "; clean " +
@@ -107,21 +109,21 @@ lazy val packageDebianSystemD = taskKey[File]("creates deb-systemd package")
 
 
 packageDebianUpstart := {
-  val output = baseDirectory.value / "package" / "upstart" / s"${name.value}-${version.value}_$debianPlatform.deb"
+  val output = baseDirectory.value / "package" / "upstart" / s"${name.value}-${version.value}_$debianArchitecture.deb"
   val debianFile = (packageBin in Debian).value
   IO.move(debianFile, output)
   output
 }
 
 packageDebianSystemV := {
-  val output = baseDirectory.value / "package" / "systemv" / s"${name.value}-${version.value}_$debianPlatform.deb"
+  val output = baseDirectory.value / "package" / "systemv" / s"${name.value}-${version.value}_$debianArchitecture.deb"
   val debianFile = (packageBin in Debian).value
   IO.move(debianFile, output)
   output
 }
 
 packageDebianSystemD := {
-  val output = baseDirectory.value / "package" / "systemd" / s"${name.value}-${version.value}_$debianPlatform.deb"
+  val output = baseDirectory.value / "package" / "systemd" / s"${name.value}-${version.value}_$debianArchitecture.deb"
   val debianFile = (packageBin in Debian).value
   IO.move(debianFile, output)
   output
