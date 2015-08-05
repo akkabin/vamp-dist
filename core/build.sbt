@@ -34,11 +34,9 @@ rpmLicense := Some("Apache 2")
 
 // ### Docker
 packageSummary in Docker := "The Core of Vamp"
-packageName in Docker := "magneticio/vamp-core" // Only add this if you want to rename your docker image name
-dockerBaseImage := "java:8" // Docker image to use as a base for the application image
 dockerExposedPorts in Docker := Seq(8080) // Ports to expose from container for Docker container linking
+dockerRepository := Some("magneticio") // Repository used when publishing Docker image
 dockerUpdateLatest := true
-
 
 
 mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
