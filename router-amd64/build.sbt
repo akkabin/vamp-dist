@@ -1,6 +1,7 @@
 import sbt.Keys._
 import com.typesafe.sbt.packager.archetypes.ServerLoader
-import com.typesafe.sbt.packager.linux.LinuxSymlink
+
+import com.typesafe.sbt.packager.docker._
 
 enablePlugins(JavaServerAppPackaging)
 
@@ -30,13 +31,41 @@ packageArchitecture in Rpm := rpmArchitecture
 serverLoading in Rpm := ServerLoader.Systemd
 
 // ### Docker
+val dockerInstallLocation = "/opt/docker" //  differs from the linux packaging, which uses /usr/share/vamp-router
+
 packageSummary in Docker := "Vamp router"
-packageName in Docker := "magneticio/vamp-router" // Only add this if you want to rename your docker image name
+dockerRepository := Some("magneticio") // Repository used when publishing Docker image
 dockerBaseImage := "ubuntu:latest" // Docker image to use as a base for the application image
 dockerExposedPorts in Docker := Seq(80,1988,10001) // Ports to expose from container for Docker container linking
-dockerEntrypoint in Docker:= Seq("/vamp-router")
+dockerEntrypoint := Seq(s"$dockerInstallLocation/vamp-router")
 dockerUpdateLatest := true
+daemonUser in Docker := "root"  // Set to root, so we don't need to setup sudo for installing haproxy
+defaultLinuxInstallLocation in Docker := dockerInstallLocation
 
+// Add the executable in docker
+mappings in Docker <+= (packageBin in Compile, target ) map { (_, target) =>
+  target / platform / "vamp-router" -> s"$dockerInstallLocation/vamp-router"
+}
+
+dockerCommands ++= Seq(
+  //Add haproxy repo
+  ExecCmd("RUN", "sh", "-c","echo 'deb http://ppa.launchpad.net/vbernat/haproxy-1.5/ubuntu trusty main' >> /etc/apt/sources.list"),
+  ExecCmd("RUN", "apt-key", "adv", "--keyserver", "keyserver.ubuntu.com","--recv-keys", "1C61B9CD"),
+
+  // Add haproxy
+  ExecCmd("RUN", "apt-get", "update"),
+  ExecCmd("RUN", "apt-get", "install", "-y", "haproxy"),
+
+  // make the executable executable
+  ExecCmd("RUN", "chmod", "u+x", s"$dockerInstallLocation/vamp-router"),
+
+  // Create data dir and make it writable
+  ExecCmd("RUN", "mkdir", s"$dockerInstallLocation/data") ,
+  ExecCmd("RUN", "chmod", "u+w", s"$dockerInstallLocation/data")
+)
+
+
+// ## Universal section, used by both Linux & Docker packaging
 
 resourceGenerators in Compile += Def.task {
   val location = url(s"https://bintray.com/artifact/download/magnetic-io/downloads/vamp-router/vamp-router_${vampRouterVersion}_linux_$platform.zip")
@@ -51,21 +80,6 @@ mappings in Universal := {
     case (file, fileName) =>  ! fileName.endsWith(".jar")
   }
   filtered
-}
-
-// Add an empty folder for the data
-linuxPackageMappings += packageTemplateMapping(s"/usr/share/${name.value}/data")() withUser(name.value) withGroup(name.value)
-
-// Make the configuration directory writeable
-linuxPackageMappings += packageTemplateMapping(s"/usr/share/${name.value}/configuration")() withUser(name.value) withGroup(name.value)
-
-// copy vamp-router from the extracted bintray zip
-linuxPackageMappings += packageMapping( (target.value / platform / "vamp-router",  "/usr/share/vamp-router/vamp-router") ) withPerms "755"
-
-// Add the script file to which starts vamp-router
-mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
-  val bin = src / "templates" / "bash-template"
-  bin -> "bin/vamp-router"
 }
 
 // Add the config files
@@ -83,6 +97,21 @@ mappings in Universal <+= (packageBin in Compile, target ) map { (_, target) =>
   val conf = target / platform / "examples" / "example1.json"
   conf -> "examples/example1.json"
 }
+
+
+
+// ## Linux section
+
+// Add an empty folder for the data
+linuxPackageMappings += packageTemplateMapping(s"/usr/share/${name.value}/data")() withUser(name.value) withGroup(name.value)
+
+// Make the configuration directory writeable
+linuxPackageMappings += packageTemplateMapping(s"/usr/share/${name.value}/configuration")() withUser(name.value) withGroup(name.value)
+
+// copy vamp-router from the extracted bintray zip
+linuxPackageMappings += packageMapping( (target.value / platform / "vamp-router",  s"/usr/share/${name.value}/vamp-router") ) withPerms "755"
+
+linuxPackageMappings += packageMapping( (sourceDirectory.value / "templates" / "bash-template",  s"/usr/share/${name.value}/bin/vamp-router") ) withPerms "755"
 
 
 // ## Debian
@@ -128,5 +157,3 @@ packageDebianSystemD := {
   IO.move(debianFile, output)
   output
 }
-
-
