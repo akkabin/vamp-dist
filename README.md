@@ -10,8 +10,7 @@ We ship Vamp in 4 flavors:
   for Debian based Linux systems (Debian / Ubuntu)
 - .rpm, 
   for the RPM based Linux systems (Red Hat / CentOS)
-- ~~Docker images, 
-  published on Docker hub~~ Coming soon
+- Docker images, published on Docker hub
 
 Vamp consists of 4 packages:
 
