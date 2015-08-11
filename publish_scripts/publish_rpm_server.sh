@@ -23,10 +23,12 @@ echo "*** Building ${PACKAGE} ***"
 
 sbt packageRpmAll
 
-echo "*** Publishing ${DISTRIBUTABLE}, version ${VERSION} to repo: rpm-upstart ***"
+
 
 DISTRIBUTABLE=`ls package/upstart/${PACKAGE}-*.rpm | xargs -n1 basename`
 VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/-1.${ARCH}.rpm//g`
+
+echo "*** Publishing ${DISTRIBUTABLE}, version ${VERSION} to repo: rpm-upstart ***"
 
 : ${DISTRIBUTABLE:?"DISTRIBUTABLE not set"}
 : ${VERSION:?"VERSION not set"}
@@ -34,10 +36,11 @@ VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/-1.${ARCH}.rpm//g`
 ../publish_scripts/bintray_rpm.sh rpm-upstart ${PACKAGE} ${DISTRIBUTABLE} package/upstart ${VERSION}
 
 
-echo "*** Publishing ${DISTRIBUTABLE}, version ${VERSION} to repo: rpm ***"
 
 DISTRIBUTABLE=`ls package/systemd/${PACKAGE}-*.rpm | xargs -n1 basename`
 VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/-1.${ARCH}.rpm//g`
+
+echo "*** Publishing ${DISTRIBUTABLE}, version ${VERSION} to repo: rpm ***"
 
 : ${DISTRIBUTABLE:?"DISTRIBUTABLE not set"}
 : ${VERSION:?"VERSION not set"}
