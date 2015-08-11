@@ -89,13 +89,15 @@ The package can be found in the `target/rpm/RPMS/noarch/` directory and is typic
 
 ### Creating docker images
 
-** Warning** This has not been tested yet (exposed ports have not been setup properly)
-
-
 ```bash
 sbt docker:publishLocal
 ```
-
+or push them directly
+```bash
+sbt docker:publish
+```
+ 
+ 
 
 
 
