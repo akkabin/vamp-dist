@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Check number of args
-if [ "$#" -ne 4 ]; then
+if [ "$#" -ne 5 ]; then
     SCRIPTNAME=$(basename "$0")
-    echo "Usage: ${SCRIPTNAME} <package-name> <distributable> <sourcepath> <version>"
+    echo "Usage: ${SCRIPTNAME} <repo> <package-name> <distributable> <sourcepath> <version>"
     exit 1
 fi
 
@@ -10,12 +10,14 @@ fi
 : ${BINTRAY_USER:?"No BINTRAY_USER set"}
 : ${BINTRAY_API_KEY:?"No BINTRAY_API_KEY set"}
 
-PACKAGE=$1
-DISTRIBUTABLE=$2
-SOURCEPATH=$3        # target/rpm/RPMS/noarch
-VERSION=$4
+REPO=$1
+PACKAGE=$2
+DISTRIBUTABLE=$3
+SOURCEPATH=$4        # target/rpm/RPMS/noarch
+VERSION=$5
 
 
+: ${REPO:?"Not set"}
 : ${PACKAGE:?"Not set"}
 : ${DISTRIBUTABLE:?"Not set"}
 : ${SOURCEPATH:?"Not set"}
@@ -24,4 +26,4 @@ VERSION=$4
 curl -v -T ${SOURCEPATH}/${DISTRIBUTABLE} \
      -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
      -H "X-Bintray-Publish:1" \
-     https://api.bintray.com/content/magnetic-io/rpm/${PACKAGE}/${VERSION}/${DISTRIBUTABLE}
+     https://api.bintray.com/content/magnetic-io/${REPO}/${PACKAGE}/${VERSION}/${DISTRIBUTABLE}

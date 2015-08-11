@@ -29,8 +29,12 @@ VERSION=`echo ${DISTRIBUTABLE:${#PACKAGE}+1} | sed s/-1.${ARCH}.rpm//g`
 : ${DISTRIBUTABLE:?"DISTRIBUTABLE not set"}
 : ${VERSION:?"VERSION not set"}
 
-echo "*** Publishing ${DISTRIBUTABLE}, version ${VERSION} ***"
+echo "*** Publishing ${DISTRIBUTABLE}, version ${VERSION} to repo: rpm-upstart ***"
 
-../publish_scripts/bintray_rpm.sh ${PACKAGE} ${DISTRIBUTABLE} target/rpm/RPMS/${ARCH} ${VERSION}
+../publish_scripts/bintray_rpm.sh rpm-upstart ${PACKAGE} ${DISTRIBUTABLE} target/rpm/RPMS/${ARCH} ${VERSION}
+
+echo "*** Publishing ${DISTRIBUTABLE}, version ${VERSION} to repo: rpm ***"
+
+../publish_scripts/bintray_rpm.sh rpm ${PACKAGE} ${DISTRIBUTABLE} target/rpm/RPMS/${ARCH} ${VERSION}
 
 cd ..

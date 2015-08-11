@@ -30,6 +30,7 @@ val debianPlatform = "all"
 rpmVendor := "magnetic.io"
 rpmUrl := Some("http://vamp.io")
 rpmLicense := Some("Apache 2")
+val rpmArchitecture="noarch"
 
 
 // ### Docker
@@ -97,6 +98,34 @@ packageDebianSystemD := {
   IO.move(debianFile, output)
   output
 }
+
+
+// Creating custom packageOutputs formats
+
+addCommandAlias("packageRpmAll", "; clean " +
+  "; set serverLoading in Rpm := com.typesafe.sbt.packager.archetypes.ServerLoader.Upstart" +
+  "; packageRpmUpstart"  +
+  "; clean " +
+  "; set serverLoading in Rpm := com.typesafe.sbt.packager.archetypes.ServerLoader.Systemd" +
+  "; packageRpmSystemD"
+)
+
+lazy val packageRpmUpstart = taskKey[File]("creates rpm-upstart package")
+lazy val packageRpmSystemD = taskKey[File]("creates rpm-systemd package")
+
+packageRpmUpstart := {
+  val output = baseDirectory.value / "package" / "upstart" / s"${name.value}-${version.value}_$rpmArchitecture.rpm"
+  val rpmFile = (packageBin in Rpm).value
+  IO.move(rpmFile, output)
+  output
+}
+packageRpmSystemD := {
+  val output = baseDirectory.value / "package" / "systemd" / s"${name.value}-${version.value}_$rpmArchitecture.rpm"
+  val rpmFile = (packageBin in Rpm).value
+  IO.move(rpmFile, output)
+  output
+}
+
 
 
 // ###  Build
