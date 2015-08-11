@@ -107,13 +107,13 @@ lazy val packageRpmUpstart = taskKey[File]("creates rpm-upstart package")
 lazy val packageRpmSystemD = taskKey[File]("creates rpm-systemd package")
 
 packageRpmUpstart := {
-  val output = baseDirectory.value / "package" / "upstart" / s"${name.value}-${version.value}_$rpmArchitecture.rpm"
+  val output = baseDirectory.value / "package" / "upstart" / s"${name.value}-${version.value}-1.$rpmArchitecture.rpm"
   val rpmFile = (packageBin in Rpm).value
   IO.move(rpmFile, output)
   output
 }
 packageRpmSystemD := {
-  val output = baseDirectory.value / "package" / "systemd" / s"${name.value}-${version.value}_$rpmArchitecture.rpm"
+  val output = baseDirectory.value / "package" / "systemd" / s"${name.value}-${version.value}-1.$rpmArchitecture.rpm"
   val rpmFile = (packageBin in Rpm).value
   IO.move(rpmFile, output)
   output
