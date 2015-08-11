@@ -37,6 +37,7 @@ packageSummary in Docker := "The Core of Vamp"
 dockerExposedPorts in Docker := Seq(8080) // Ports to expose from container for Docker container linking
 dockerRepository := Some("magneticio") // Repository used when publishing Docker image
 dockerUpdateLatest := true
+//daemonUser in Docker := "root"
 
 
 mappings in Universal <+= (packageBin in Compile, sourceDirectory ) map { (_, src) =>
