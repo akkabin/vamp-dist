@@ -2,7 +2,7 @@
 
 This project contains the definitions for distributing the different packages of Vamp.
 
-We ship Vamp in 4 flavors:
+We ship Vamp in 5 flavors:
 
 - universal zip, 
   the zip file contains a fat jar, scripts to run it on Linux (OS X) and Windows & configuration files
@@ -11,6 +11,7 @@ We ship Vamp in 4 flavors:
 - .rpm, 
   for the RPM based Linux systems (Red Hat / CentOS)
 - Docker images, published on Docker hub
+- Brew package (OSX - Vamp CLI only)
 
 Vamp consists of 4 packages:
 
