@@ -13,11 +13,7 @@ You need at least git, Java 8 & sbt installed on your machine, to create the uni
 For the docker image, you'll also need to have docker (boot2docker) installed.
 
 The Linux packages can only be build on a machine with the correct package manager. 
-In effect, you'll need a debian flavor machine to create .deb packages and a Red Hat flavor machine to create .rpm packages.
-
-Instruction how to prepare your debian machine can be found [here](https://github.com/magneticio/vamp-dist/blob/master/docs/prepare-debian.md).
-For Red Hat, use [these](https://github.com/magneticio/vamp-dist/blob/master/docs/prepare-redhat.md) instructions 
-
+Since we use Travis CI for automated building, we don't need to run this locally on a Linux machine.
 
 ## Preparing the build
 

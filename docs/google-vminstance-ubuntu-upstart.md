@@ -1,4 +1,4 @@
-#Installing on Google VM Instance (Debian - Wheezy)
+#Installing on Google VM Instance (Ubuntu)
 
 Here are some instructions to setup a Google VM instance (Ubuntu 14.04 LTS)
 
