@@ -4,10 +4,10 @@ import com.typesafe.sbt.packager.archetypes.ServerLoader.SystemV
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.9.1"
+version in ThisBuild := "0.7.10"
 
-val vampBootstrapVersion = "0.7.9"
-val vampUiVersion = "0.7.9-87"
+val vampBootstrapVersion = "0.7.10"
+val vampUiVersion = "0.7.10-128"
 
 libraryDependencies ++=Seq(
   "io.vamp" %% "core-bootstrap" % vampBootstrapVersion,
@@ -129,7 +129,7 @@ packageRpmSystemD := {
 
 
 // ###  Build
-scalaVersion := "2.11.6"
+scalaVersion := "2.11.7"
 scalaVersion in ThisBuild := scalaVersion.value
 
 resolvers in ThisBuild += Resolver.url("magnetic-io ivy resolver", url("http://dl.bintray.com/magnetic-io/vamp"))(Resolver.ivyStylePatterns)
