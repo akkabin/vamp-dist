@@ -1,3 +1,4 @@
+import com.typesafe.sbt.packager.docker.ExecCmd
 import sbt.Keys._
 import com.typesafe.sbt.packager.archetypes.ServerLoader
 import com.typesafe.sbt.packager.linux.LinuxSymlink
@@ -35,7 +36,7 @@ packageName in Docker := "magneticio/vamp-router" // Only add this if you want t
 dockerBaseImage := "ubuntu:latest" // Docker image to use as a base for the application image
 dockerExposedPorts in Docker := Seq(80,1988,10001) // Ports to expose from container for Docker container linking
 dockerEntrypoint in Docker:= Seq("/vamp-router")
-dockerUpdateLatest := true
+dockerUpdateLatest := false
 
 
 resourceGenerators in Compile += Def.task {
@@ -52,6 +53,14 @@ mappings in Universal := {
   }
   filtered
 }
+
+
+dockerCommands ++= Seq(
+  //Stop creation of router within this project
+  ExecCmd("USE-router-amd64-FOR-DOCKER-IMAGE-CREATION","use router-amd64 to create the docker images")
+)
+
+
 
 // Add an empty folder for the data
 linuxPackageMappings += packageTemplateMapping(s"/usr/share/${name.value}/data")() withUser(name.value) withGroup(name.value)
