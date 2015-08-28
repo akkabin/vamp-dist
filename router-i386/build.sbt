@@ -4,8 +4,8 @@ import com.typesafe.sbt.packager.linux.LinuxSymlink
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.9.2"
-val vampRouterVersion = "0.7.9"
+version in ThisBuild := "0.7.10"
+val vampRouterVersion = "0.7.10"
 
 
 val platform = "386"

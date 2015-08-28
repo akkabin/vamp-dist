@@ -5,8 +5,8 @@ import com.typesafe.sbt.packager.docker._
 
 enablePlugins(JavaServerAppPackaging)
 
-version in ThisBuild := "0.7.9.2"
-val vampRouterVersion = "0.7.9"
+version in ThisBuild := "0.7.10"
+val vampRouterVersion = "0.7.10"
 
 
 val platform = "amd64"
