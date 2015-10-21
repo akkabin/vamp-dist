@@ -25,19 +25,19 @@ before_script:
 
 script:
 ### CLI ###
-# - ./publish_scripts/publish_universal.sh cli vamp-cli
-# - ./publish_scripts/publish_debian_client.sh cli vamp-cli
-# - ./publish_scripts/publish_rpm_client.sh cli vamp-cli noarch
+- ./publish_scripts/publish_universal.sh cli vamp-cli
+- ./publish_scripts/publish_debian_client.sh cli vamp-cli
+- ./publish_scripts/publish_rpm_client.sh cli vamp-cli noarch
 
 ### CORE ###
-# - ./publish_scripts/publish_universal.sh core vamp-core
-# - ./publish_scripts/publish_debian_server.sh core vamp-core i386,amd64
-# - ./publish_scripts/publish_rpm_server.sh core vamp-core noarch
+- ./publish_scripts/publish_universal.sh core vamp-core
+- ./publish_scripts/publish_debian_server.sh core vamp-core i386,amd64
+- ./publish_scripts/publish_rpm_server.sh core vamp-core noarch
 
 ### PULSE ###
-# - ./publish_scripts/publish_universal.sh pulse vamp-pulse
-# - ./publish_scripts/publish_debian_server.sh pulse vamp-pulse i386,amd64
-# - ./publish_scripts/publish_rpm_server.sh pulse vamp-pulse noarch
+- ./publish_scripts/publish_universal.sh pulse vamp-pulse
+- ./publish_scripts/publish_debian_server.sh pulse vamp-pulse i386,amd64
+- ./publish_scripts/publish_rpm_server.sh pulse vamp-pulse noarch
 
 
 ### ROUTER ###
