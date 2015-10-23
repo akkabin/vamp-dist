@@ -35,20 +35,20 @@ script:
 - ./publish_scripts/publish_rpm_server.sh core vamp-core noarch
 
 ### PULSE ###
-- ./publish_scripts/publish_universal.sh pulse vamp-pulse
-- ./publish_scripts/publish_debian_server.sh pulse vamp-pulse i386,amd64
-- ./publish_scripts/publish_rpm_server.sh pulse vamp-pulse noarch
+#- ./publish_scripts/publish_universal.sh pulse vamp-pulse
+#- ./publish_scripts/publish_debian_server.sh pulse vamp-pulse i386,amd64
+#- ./publish_scripts/publish_rpm_server.sh pulse vamp-pulse noarch
 
 
 ### ROUTER ###
 
 # Not publishing universal -> already done via vamp-router project
 
-- ./publish_scripts/publish_debian_server.sh router-i386 vamp-router i386
-- ./publish_scripts/publish_debian_server.sh router-amd64 vamp-router amd64
+#- ./publish_scripts/publish_debian_server.sh router-i386 vamp-router i386
+#- ./publish_scripts/publish_debian_server.sh router-amd64 vamp-router amd64
 
 # RPM only published as 64bit
-- ./publish_scripts/publish_rpm_server.sh router-amd64 vamp-router x86_64
+#- ./publish_scripts/publish_rpm_server.sh router-amd64 vamp-router x86_64
 
 
 
